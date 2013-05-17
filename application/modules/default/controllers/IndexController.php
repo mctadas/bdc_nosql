@@ -1,10 +1,14 @@
 <?php
 
 // Lib
+use \MongoClient;
+
 use BDC\BaseController;
 use BDC\Normalizer\Command\NormalizeData;
 use BDC\DownloadManager;
-use \MongoClient;
+
+use ViewModel\User\User;
+
 
 class IndexController extends BaseController {
 
@@ -23,12 +27,18 @@ class IndexController extends BaseController {
         ini_set('display_errors', 'On');
 		$this->view->a = "aaaa";
 		
-		$m = new MongoClient();
-		$db = $m->names;
-		$collection = $db->testnames->findOne();
-		$this->view->a = $collection['name'];
+ 		$user = new User();
+//  		$user->name = 'user_test';
+//  		$user->save();
+//  		$this->view->a = User::findOne()->name;
+		
+// 		$m = new MongoClient();
+// 		$db = $m->names;
+// 		$collection = $db->testnames->findOne();
+// 		$this->view->a = $collection['name'];
 	      
 
+		
     }
 
 }

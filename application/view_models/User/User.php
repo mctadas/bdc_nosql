@@ -7,19 +7,19 @@ use BDC\Models\BaseReadModel;
 
 class User extends BaseReadModel
 {
-    const COLLECTION = 'users';
+    protected static $_collection = 'user';
     
-    /**
-     * @return array Array of examples.
-     */
-    public function getUsersList()
-    {
-        $select = $this->_db
-                ->select()
-                ->from(self::COLLECTION);
+//     /**
+//      * @return array Array of examples.
+//      */
+//     public function getUsersList()
+//     {
+//         $select = $this->_db
+//                 ->select()
+//                 ->from(self::COLLECTION);
         
-        return $this->_db->fetchAll($select);
-    }
+//         return $this->_db->fetchAll($select);
+//     }
     
 
 }
