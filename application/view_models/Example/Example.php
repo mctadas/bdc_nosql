@@ -3,7 +3,7 @@
 namespace ViewModel\Example;
 
 // Lib
-use Bb4w\Models\BaseReadModel;
+use BDC\Models\BaseReadModel;
 
 class Example extends BaseReadModel
 {
