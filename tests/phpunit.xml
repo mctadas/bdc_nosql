@@ -1,0 +1,19 @@
+<phpunit bootstrap="./bootstrap.php">
+    <testsuite name="Application">
+        <directory>./application</directory>
+    </testsuite>
+    <testsuite name="Backend">
+        <directory>./backend</directory>
+    </testsuite>
+    
+    <filter>
+        <!-- If Zend Framework is inside your project's library, uncomment this filter -->
+
+        <whitelist>
+            <directory suffix=".php">../library/Zend</directory>
+            <directory suffix=".php">../library/Bb4w</directory>
+            <directory suffix=".php">../backend/</directory>
+        </whitelist>
+
+    </filter>
+</phpunit>

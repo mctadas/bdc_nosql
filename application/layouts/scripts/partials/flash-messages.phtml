@@ -1,0 +1,23 @@
+<?php if (!empty($this->messages)):  ?>
+    <?php foreach ($this->messages as $category => $messages): ?>
+		<?php
+			/* from Tomas:
+			 * galimos "class: reikšmės:
+			 * msg msg-error	- klaidų pranešimams (raudonas)
+			 * msg msg-info		- papildomos informacijos išvedimas (mėlynas).
+			 *					  Pranešimams iš serijos "Įrašas sėkmingai
+			 *					  įterptas" naudoti msg-ok
+			 * msg msg-warn		- įspėjimų pranešimams (geltonas)
+			 * msg msg-ok		- sėkmingos operacijos atlikimo pranešimams
+			 *					  (žalias).
+			 */
+		?>
+        <div class="msg msg-<?=$category;?> ui-corner-all">
+			<p>
+				<?php foreach ($messages as $message): ?>
+					<?php echo $this->escape($message) ?><br />
+				<?php endforeach; ?>
+			</p>
+        </div>
+    <?php endforeach; ?>
+<?php endif; ?>
