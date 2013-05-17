@@ -11,8 +11,6 @@ use \Shanty_Mongo_Document;
  */
 abstract class BaseModel extends Shanty_Mongo_Document
 {
-
-    protected static $_db = 'mano_teo';
     
 	/**
 	 * @var Zend_Db_Adapter_Abstract

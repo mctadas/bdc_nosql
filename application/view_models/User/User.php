@@ -7,7 +7,7 @@ use BDC\Models\BaseReadModel;
 
 class User extends BaseReadModel
 {
-    protected static $_collection = 'user';
+    protected static $_collection = 'testnames';
     
 //     /**
 //      * @return array Array of examples.

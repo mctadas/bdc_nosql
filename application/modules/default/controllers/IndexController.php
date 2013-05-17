@@ -25,19 +25,26 @@ class IndexController extends BaseController {
     public function indexAction() {
         error_reporting(E_ALL);
         ini_set('display_errors', 'On');
-		$this->view->a = "aaaa";
 		
- 		$user = new User();
+        $str = 'test '.time();
+        $m = new MongoClient();
+        $db = $m->names;
+        
+        //insert
+        $db->testnames->insert(array( 'name'=> $str));
+        $collection = $db->testnames->findOne(array( 'name' => $str));
+        $this->view->a = $collection['name'];
+        
+        //delete
+        $db->testnames->remove(array( 'name'=> $str));
+        $collection = $db->testnames->findOne(array( 'name' => $str));
+        $this->view->b = $collection['name'];
+        
+        
+//  		$user = new User();
 //  		$user->name = 'user_test';
 //  		$user->save();
-//  		$this->view->a = User::findOne()->name;
-		
-// 		$m = new MongoClient();
-// 		$db = $m->names;
-// 		$collection = $db->testnames->findOne();
-// 		$this->view->a = $collection['name'];
-	      
-
+//  		$this->view->b = User::findOne()->name;
 		
     }
 
