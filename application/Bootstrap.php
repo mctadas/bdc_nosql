@@ -1,8 +1,8 @@
 <?php
 
 // Lib
-use Bb4w\DiContainer;
-use Bb4w\EventSourcing\SimpleEventPublisher;
+use BDC\DiContainer;
+use BDC\EventSourcing\SimpleEventPublisher;
 
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap 
 {
@@ -77,64 +77,14 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 					return Zend_Registry::get('db_normalizer');
 				};
 
-		// normalizer
-		$c->normalizer = function() use ($c) {
-					return new Bb4w\Normalizer\Normalizer($c->db, $c->dbNormalizer);
-				};
 
 		$c->downloadManager = function() use ($c) {
-					return new Bb4w\DownloadManager($c->db, APPLICATION_PATH . '/exported');
+					return new BDC\DownloadManager($c->db, APPLICATION_PATH . '/exported');
 				};
 
 		// Adapter Queue
-		$c->twitterQueue = function() use ($c) {
-					return new Domain\Adapter\Twitter\TwitterQueue($c->db);
-				};
 		$c->facebookQueue = function() use ($c) {
 					return new Domain\Adapter\Facebook\FacebookQueue($c->db);
-				};
-		$c->googlePlusQueue = function() use ($c) {
-					return new Domain\Adapter\GooglePlus\GooglePlusQueue($c->db);
-				};
-		$c->mysqlQueue = function() use ($c) {
-					return new Domain\Adapter\MySQL\MySQLQueue($c->db);
-				};
-		$c->oracleQueue = function() use ($c) {
-					return new Domain\Adapter\Oracle\OracleQueue($c->db);
-				};
-		$c->postgresqlQueue = function() use ($c) {
-					return new Domain\Adapter\PostgreSQL\PostgreSQLQueue($c->db);
-				};
-		$c->filescsvtxtQueue = function() use ($c) {
-					return new Domain\Adapter\FilesCsvTxt\FilesCsvTxtQueue($c->db);
-				};
-		$c->filesxlsxQueue = function() use ($c) {
-					return new Domain\Adapter\FilesXlsx\FilesXlsxQueue($c->db);
-				};
-		$c->soapQueue = function() use ($c) {
-					return new Domain\Adapter\Soap\SoapQueue($c->db);
-				};
-		$c->pdfQueue = function() use ($c) {
-					return new Domain\Adapter\PDF\PDFQueue($c->db);
-				};
-		$c->normalizedQueue = function() use ($c) {
-					return new Domain\Adapter\Normalized\NormalizedQueue($c->db);
-				};
-
-		$c->adapterQueues = function() use ($c) {
-					return array(
-						$c->twitterQueue,
-						$c->facebookQueue,
-						$c->googlePlusQueue,
-						$c->mysqlQueue,
-						$c->oracleQueue,
-						$c->postgresqlQueue,
-						$c->filescsvtxtQueue,
-						$c->filesxlsxQueue,
-						$c->soapQueue,
-						$c->pdfQueue,
-						$c->normalizedQueue
-					);
 				};
 
 		// Event maps
@@ -156,13 +106,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 					return 'system_event_log';
 				};
 		$c->eventStore = function() use ($c) {
-					return new Bb4w\EventSourcing\SimpleEventStore($c->db, $c->eventLogTableName);
+					return new BDC\EventSourcing\SimpleEventStore($c->db, $c->eventLogTableName);
 				};
 		$c->commandQueue = function() use ($c) {
-					return new Bb4w\Domain\CommandQueue();
+					return new BDC\Domain\CommandQueue();
 				};
 		$c->commandDispatcher = function() use ($c) {
-					return new Bb4w\Domain\CommandDispatcher(
+					return new BDC\Domain\CommandDispatcher(
 									$c->commandQueue,
 									$c->eventStore,
 									$c->eventPublisher,
@@ -175,38 +125,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$c->systemMonitorAdapterLogUpdater = function() use ($c) {
 					return new \ViewModel\System\Monitor\EventHandler\AdapterLogUpdater($c->db);
 				};
-		$c->twitterUpdater = function () use ($c) {
-					return new \ViewModel\Twitter\EventHandler\Updater($c->db);
-				};
 		$c->facebookUpdater = function () use ($c) {
 					return new \ViewModel\Facebook\EventHandler\Updater($c->db);
-				};
-		$c->googlePlusUpdater = function () use ($c) {
-					return new \ViewModel\GooglePlus\EventHandler\Updater($c->db);
-				};
-		$c->mysqlUpdater = function () use ($c) {
-					return new \ViewModel\MySQL\EventHandler\Updater($c->db);
-				};
-		$c->oracleUpdater = function () use ($c) {
-					return new \ViewModel\Oracle\EventHandler\Updater($c->db);
-				};
-		$c->postgresqlUpdater = function () use ($c) {
-					return new \ViewModel\PostgreSQL\EventHandler\Updater($c->db);
-				};
-		$c->filescsvtxtUpdater = function () use ($c) {
-					return new \ViewModel\FilesCsvTxt\EventHandler\Updater($c->db);
-				};
-		$c->filesxlsxUpdater = function () use ($c) {
-					return new \ViewModel\FilesXlsx\EventHandler\Updater($c->db);
-				};
-		$c->soapUpdater = function () use ($c) {
-					return new \ViewModel\Soap\EventHandler\Updater($c->db);
-				};
-		$c->pdfUpdater = function () use ($c) {
-					return new \ViewModel\PDF\EventHandler\Updater($c->db);
-				};
-		$c->normalizedUpdater = function () use ($c) {
-					return new \ViewModel\Normalized\EventHandler\Updater($c->db);
 				};
 
 		// View models

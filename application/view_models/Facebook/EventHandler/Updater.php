@@ -7,8 +7,8 @@ use Domain\Adapter\Facebook\Event\PostCreated;
 use Domain\Adapter\Facebook\Event\EventCreated;
 
 // Lib
-use Bb4w\ValueObject\Uuid;
-use Bb4w\Models\BaseWriteModel;
+use BDC\ValueObject\Uuid;
+use BDC\Models\BaseWriteModel;
 use ReadModel\User as UserReadModel;
 
 // Zend

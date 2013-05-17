@@ -5,7 +5,7 @@ namespace ViewModel\Example\EventHandler;
 use Domain\Adapter\Twitter\Event\MentionFound;
 
 // Lib
-use Bb4w\Models\BaseWriteModel;
+use BDC\Models\BaseWriteModel;
 use ReadModel\User as UserReadModel;
 // Zend
 use \Zend_Db_Adapter_Abstract;
