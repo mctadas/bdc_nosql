@@ -29,7 +29,7 @@ class IndexController extends BaseController {
         $str = 'test '.time();
         $m = new MongoClient();
         $db = $m->names;
-        
+
         //insert
         $db->testnames->insert(array( 'name'=> $str));
         $collection = $db->testnames->findOne(array( 'name' => $str));
@@ -40,11 +40,9 @@ class IndexController extends BaseController {
         $collection = $db->testnames->findOne(array( 'name' => $str));
         $this->view->b = $collection['name'];
         
-        
-//  		$user = new User();
-//  		$user->name = 'user_test';
-//  		$user->save();
-//  		$this->view->b = User::findOne()->name;
+
+  		$user = $this->_getDiContainer()->userViewModel->save();
+  		$this->view->b = User::findOne()->name;
 		
     }
 

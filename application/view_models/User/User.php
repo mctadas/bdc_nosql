@@ -9,6 +9,12 @@ class User extends BaseReadModel
 {
     protected static $_collection = 'testnames';
     
+    public function save()
+    {
+        $this->_db->name = "test";
+        $this->_db->save();
+    }
+    
 //     /**
 //      * @return array Array of examples.
 //      */

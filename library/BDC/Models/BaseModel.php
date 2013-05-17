@@ -9,7 +9,7 @@ use \Shanty_Mongo_Document;
 /**
  * @package Kompro 
  */
-abstract class BaseModel extends Shanty_Mongo_Document
+abstract class BaseModel 
 {
     
 	/**
@@ -20,7 +20,7 @@ abstract class BaseModel extends Shanty_Mongo_Document
 	/**
 	 * @param Zend_Db_Adapter_Abstract $db 
 	 */
-	public function __construct(Zend_Db_Adapter_Abstract $db) 
+	public function __construct(\Shanty_Mongo_Document $db) 
 	{
 		$this->_db = $db;
 	}

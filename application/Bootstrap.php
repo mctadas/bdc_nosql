@@ -19,7 +19,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$dbResource = $this->getPluginResource('multidb');
 		if ($dbResource) {
 			$db = $dbResource->getDb('local');
-			Zend_Registry::set('db', $db);
+			Zend_Registry::set('db', new \Shanty_Mongo_Document);
 
 			$dbNormalizer = $dbResource->getDb('normalizer');
 			Zend_Registry::set('db_normalizer', $dbNormalizer);
@@ -82,10 +82,6 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 					return new BDC\DownloadManager($c->db, APPLICATION_PATH . '/exported');
 				};
 
-		// Adapter Queue
-		$c->facebookQueue = function() use ($c) {
-					return new Domain\Adapter\Facebook\FacebookQueue($c->db);
-				};
 
 		// Event maps
 		$c->domainEventRoutingMap = function() use ($c) {
@@ -111,25 +107,25 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$c->commandQueue = function() use ($c) {
 					return new BDC\Domain\CommandQueue();
 				};
-		$c->commandDispatcher = function() use ($c) {
-					return new BDC\Domain\CommandDispatcher(
-									$c->commandQueue,
-									$c->eventStore,
-									$c->eventPublisher,
-									$c->adapterQueues
-					);
-				};
+//		$c->commandDispatcher = function() use ($c) {
+//					return new BDC\Domain\CommandDispatcher(
+//									$c->commandQueue,
+//									$c->eventStore,
+//									$c->eventPublisher,
+//									$c->adapterQueues
+//					);
+//				};
 
 
 		// Updaters
-		$c->systemMonitorAdapterLogUpdater = function() use ($c) {
-					return new \ViewModel\System\Monitor\EventHandler\AdapterLogUpdater($c->db);
-				};
-		$c->facebookUpdater = function () use ($c) {
-					return new \ViewModel\Facebook\EventHandler\Updater($c->db);
-				};
+//		$c->systemMonitorAdapterLogUpdater = function() use ($c) {
+//					return new \ViewModel\System\Monitor\EventHandler\AdapterLogUpdater($c->db);
+//				};
+//		$c->facebookUpdater = function () use ($c) {
+//					return new \ViewModel\Facebook\EventHandler\Updater($c->db);
+//				};
 
-		// View models
+		 //View models
                 $c->userViewModel = function() use ($c) {
                         return new \ViewModel\User\User($c->db);
                     };
@@ -137,9 +133,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$c->exampleViewModel = function() use ($c) {
 					return new \ViewModel\Example\Example($c->db);
 				};
-		$c->systemMonitorAdapterLogViewModel = function() use ($c) {
-					return new \ViewModel\System\Monitor\AdapterLog($c->db);
-				};
+//		$c->systemMonitorAdapterLogViewModel = function() use ($c) {
+//					return new \ViewModel\System\Monitor\AdapterLog($c->db);
+//				};
 
 		//Textile
 		$c->textileRenderer = function() use ($c) {
