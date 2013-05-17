@@ -22,6 +22,7 @@ class IndexController extends BaseController
     {
         error_reporting(E_ALL);
         ini_set('display_errors', 'On');
+		$this->view->a = "aaaa";
 //        die('test');
     }
     
