@@ -1,0 +1,121 @@
+<?php
+
+// Lib
+use \MongoClient;
+use \AMQPConnection;
+use \AMQPChannel;
+use \AMQPExchange;
+use \AMQPQueue;
+
+
+use BDC\BaseController;
+use BDC\Normalizer\Command\NormalizeData;
+use BDC\DownloadManager;
+
+use ViewModel\User\User;
+
+
+class IndexController extends BaseController {
+
+
+    /**
+     * @var Example
+     */
+    private $_exampleReadModel;
+
+    public function init() {
+        parent::init();
+    }
+
+    public function indexAction() {
+	error_reporting(E_ALL);
+        ini_set('display_errors', 'On');
+
+	$this->view->a = 'test rabbitmq';
+
+// NoSQL
+
+        $str = 'test '.time();
+        $m = new MongoClient();
+        $db = $m->names;
+
+        //insert
+        $db->testnames->insert(array( 'name'=> $str));
+        $collection = $db->testnames->findOne(array( 'name' => $str));
+        $this->view->a = $collection['name'];
+        
+        //delete
+        $db->testnames->remove(array( 'name'=> $str));
+
+//	$user = $this->_getDiContainer()->userViewModel->save();
+//	$this->view->b = User::findOne()->name;
+		
+// RabbitMQ
+
+	//$this->amqp_send("Hop hop little rabbit", "action", "amq.fanout");
+	//sleep(1);
+        $this->amqp_receive("amq.fanout","action","action");
+    }
+
+	function amqp_connection() {
+	    $amqpConnection = new AMQPConnection();
+	   // $amqpConnection->setLogin("username");
+	   // $amqpConnection->setPassword("123456");
+	   // $amqpConnection->setVhost("virthost");
+	    $amqpConnection->connect();
+
+	    if(!$amqpConnection->isConnected()) {
+		die("Cannot connect to the broker, exiting !\n");
+	    }
+	    return $amqpConnection;
+	}
+
+	function amqp_receive($exchangeName, $routingKey, $queueName) {
+
+	    $amqpConnection = $this->amqp_connection();
+
+	    $channel = new AMQPChannel($amqpConnection);
+	    $queue = new AMQPQueue($channel);
+	    $queue->setName($queueName);;die('a');
+	    $queue->bind($exchangeName, $routingKey);
+
+	    while($message = $queue->get()) {
+		echo("Message #".$message->getDeliveryTag()." '".$message->getBody()."'");
+
+		if($message->isRedelivery()) {
+		    echo("\t(this message has already been delivered)");
+		}
+		// just for testing purpose, shows how to manually remove a message from queue
+		if(rand(0,6) > 4) {
+		    $queue->ack($message->getDeliveryTag());
+		    echo("\t(this message has been removed from the queue)");
+		}
+		print_r($message->getMessageId());
+		echo "\n";
+	    }
+
+	    if(!$amqpConnection->disconnect()) {
+		throw new Exception("Could not disconnect !");
+	    }
+	}
+
+	function amqp_send($text, $routingKey, $exchangeName){
+	    $amqpConnection = $this->amqp_connection();
+
+	    $channel = new AMQPChannel($amqpConnection);
+	    $exchange = new AMQPExchange($channel);
+	    $exchange->setName($exchangeName);
+	    $exchange->setType("fanout");
+		$message = $exchange->publish($text, $routingKey);
+		if(!$message) {
+		echo "Error: Message '".$message."' was not sent.\n";
+	    } else {
+		echo "Message '".$message."' sent.\n";
+	    }
+
+	    if (!$amqpConnection->disconnect()) {
+		throw new Exception("Could not disconnect !");
+	    }
+	}
+
+}
