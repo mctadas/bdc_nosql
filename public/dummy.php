@@ -31,50 +31,7 @@ $application = new Zend_Application(
     )
 );
 
-/**
- * Drop database and import new SQL schema/data
- */
-
-// Get DB connection with current ENV settings
-$bootstrap = $application->getBootstrap();
-
-/* @var $dbResource Zend_Application_Resource_Db */
-$dbResource = $bootstrap->getPluginResource('db');
-if ($dbResource) {
-    echo 'DB connection initialized.<br />';
-} else {
-    throw new Zend_Exception('Cannot initialize DB connection.');
-}
-
-/* @var $db Zend_Db_Adapter_Pdo_Mysql */
-$db = $dbResource->getDbAdapter();
-
-// get database parameters
-$dbConfig = $db->getConfig();
-$dbName = $dbConfig['dbname'];
-
-// Drop database if it exists
-try {
-    $db->exec("SET FOREIGN_KEY_CHECKS = 1");
-} catch (Exception $ex) {
-    // most likely database does not exist, so we do nothing
-}
-$db->exec("USE `" . $dbName . "`;");
-
-// Import SQL dumps
-$dumpPath = dirname(APPLICATION_PATH) . DIRECTORY_SEPARATOR . 'database' . DIRECTORY_SEPARATOR; // path where dump files are located
-
-$dumpFileNames = array(
-    'dummy_data.sql'
-);
-
-foreach ($dumpFileNames as $fileName) {
-    $content = file_get_contents($dumpPath . $fileName);
-    $db->exec($content);
-}
-echo 'SQL dumps imported.<br />';
-
-// Close connection to DB
-$db->closeConnection();
+// create bummy user;
+//$this->_getDiContainer()->userViewModel->create_dummie('a','a','12345');
 echo '<br /><br />Done.';
 

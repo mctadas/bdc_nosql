@@ -18,6 +18,7 @@ abstract class BaseController extends Zend_Controller_Action
 	 * @var Zend_Session_Namespace
 	 */
 	protected $_session;
+	protected $_user;
 
 	public function init() 
 	{
