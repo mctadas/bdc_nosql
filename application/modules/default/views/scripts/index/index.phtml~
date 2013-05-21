@@ -1,3 +1,0 @@
-<h1>pew pew pew</h1>
-<h2><?=$this->a?></h2>
-<h2><?=$theis->b?></h2>
