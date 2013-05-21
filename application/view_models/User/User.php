@@ -51,31 +51,6 @@ class User extends BaseReadModel
         return (isset($user) ? true : false );
     }
     
-    //FIXME move elsewhere to another class
-    public function save_session($username ,$session_id)
-    {
-        $db = $this->get_connection();
-        $coll = 'sessions';
-        $db->$coll->insert(array( 'session'  => $session_id,
-                                  'username' => $username,
-                                  'time'     => time()));
-                                  
-    }
-    
-    public function get_session($session_id){
-        $db = $this->get_connection();
-        $coll = 'sessions';
-        
-        return $db->$coll->findOne(array( 'session'  => $session_id)); 
-    }
-    
-    public function remove_session($session_id){
-        $db = $this->get_connection();
-        $coll = 'sessions';
-        
-        $db->$coll->remove(array( 'session'  => $session_id)); 
-    }
-    
     // Not yet working properly
     public function save()
     {

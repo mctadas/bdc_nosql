@@ -126,8 +126,12 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 //				};
 
 		 //View models
-                $c->userViewModel = function() use ($c) {
-                        return new \ViewModel\User\User($c->db);
+        $c->userViewModel = function() use ($c) {
+                return new \ViewModel\User\User($c->db);
+            };
+                    
+        $c->sessionViewModel = function() use ($c) {
+                        return new \ViewModel\Session\Session($c->db);
                     };
                 
 		$c->exampleViewModel = function() use ($c) {
