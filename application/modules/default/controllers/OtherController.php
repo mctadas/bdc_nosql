@@ -27,6 +27,6 @@ class OtherController extends BaseController {
     }
 
     public function indexAction() {
-        $this->view->username = $this->_user['username'].' '.$this->_user['session'];
-    }       
+        $this->view->username = $this->_user['username'];
+    }
 }

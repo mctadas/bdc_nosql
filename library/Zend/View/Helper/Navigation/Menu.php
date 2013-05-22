@@ -439,7 +439,7 @@ class Zend_View_Helper_Navigation_Menu
 
             // render li tag and page
             $liClass = $isActive ? ' class="active"' : '';
-            if ($depth <  $minDepth) {
+            if ($depth <  $minDepth ) {
                 $html .= $myIndent . '<li class="nav-header">' . $page->_label . self::EOL;
             } else {
             $html .= $myIndent . '    <li' . $liClass . '>' . self::EOL
