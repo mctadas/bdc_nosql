@@ -35,20 +35,20 @@ class User extends BaseReadModel
                                   'type' => $type));        
     }
     
-    public function get_user($username, $password)
+    public function get_user($username)
     {
         // FIXME: probably should go to constructor
         $db = $this->get_connection();
         $coll = 'users'; //$this->_collection;
         
-        return $db->$coll->findOne(array( 'username' => $username,
-                                          'password' => $password));    
+        return $db->$coll->findOne(array( 'username' => $username));    
     }
+    
     
     public function is_valid($username, $password)
     {
-        $user = $this->get_user($username, $password);
-        return (isset($user) ? true : false );
+        $user = $this->get_user($username);
+        return (isset($user) and $user['password'] == $password ? true : false );
     }
     
     // Not yet working properly

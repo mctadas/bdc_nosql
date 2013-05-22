@@ -1,5 +1,25 @@
 
-
-<p>Lorem ipsum dolor sit amet, inani dolorum eum no, ei eum quodsi causae postulant, mea errem inciderint id. Mei in dicta alterum. Constituto inciderint pro an, ne has ludus fabulas. Eirmod aliquip eu eum, ex quem simul per.</p>
-
-<p>Saepe omnesque at nam. Ex pro dicat doctus delectus. Eu detraxit tractatos mel. Ignota adipisci sea eu, sea id possit scaevola, sit ea labores forensibus. Vim modo commodo fierent id, ex sit liber periculis contentiones. Latine habemus singulis quo ex, unum malorum cum no.</p>
+<table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th colspan="2">Mokėjimai / Sąskaitos</th>
+                <th>Laikotarpis</th>
+                <th>Suma</th>
+                <th colspan="2">Skambučių sąrašas</th>
+              </tr>
+            </thead>
+            <tbody>
+            <? foreach ($this->bills as $bill): ?>
+              <tr>
+                <td><?=$bill['date'];?></td>
+                <td><?=$bill['type'];?></td>
+                <td><?=$bill['doc'];?></td>
+                <td><?=$bill['period'];?></td>
+                <td><?=$bill['amount'];?></td>
+                <td><?=$bill['report'];?></td>
+                <td><?=$bill['paid'];?></td>
+              </tr>
+            <? endforeach; ?>
+            </tbody>
+          </table>
