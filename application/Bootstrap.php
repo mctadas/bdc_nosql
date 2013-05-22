@@ -158,5 +158,38 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 
 		$view->headLink()->appendStylesheet('/styles/style.css');
 	}
+	
+	/**
+	 * used for handling top-level navigation
+	 * @return Zend_Navigation
+	 */
+	protected function _initNavigation()
+	{
+  		$this->bootstrap('layout');
+        $layout = $this->getResource('layout');
+        $view = $layout->getView();		
+        $config = new Zend_Config_Xml(APPLICATION_PATH . '/configs/navigation.xml', 'nav');
+
+		$container = new Zend_Navigation($config);
+		
+		$view->navigation($container);
+		
+
+	}	
+	
+	protected function _initFrontControllerOutput() {
+
+    $this->bootstrap('FrontController');
+    $frontController = $this->getResource('FrontController');
+
+    $response = new Zend_Controller_Response_Http;
+    $response->setHeader('Content-Type', 'text/html; charset=UTF-8', true);
+    $frontController->setResponse($response);
+
+    $frontController->setParam('useDefaultControllerAlways', false);
+
+    return $frontController;
+
+}
 
 }

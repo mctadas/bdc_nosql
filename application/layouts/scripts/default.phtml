@@ -9,6 +9,19 @@
     <script src="/styles/bootstrap/js/bootstrap.min.js"></script>
   </head>
   <body>
-	<?php echo $this->layout()->content; ?>	
+  
+  
+  
+    TODO: apvilkti ManoTEO rubais
+    <div class='top_menu'>
+        <?php echo $this->navigation()->menu(); ?>
+	</div>
+	
+	</div class='content'>
+	    <?php echo $this->layout()->content; ?>	
+    </div>
+    
+    <p>Login <a href="<?= $this->url(array('action'=>'index','controller'=>'auth')); ?>">login</a></p>
+  
   </body>
 </html>
