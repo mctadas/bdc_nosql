@@ -368,7 +368,7 @@ class Zend_View_Helper_Navigation_Menu
                                    $maxDepth,
                                    $onlyActive)
     {
-        $html = '';
+        $html = '<ul class="nav nav-list">';
 
         // find deepest active
         if ($found = $this->findActive($container, $minDepth, $maxDepth)) {
@@ -422,18 +422,13 @@ class Zend_View_Helper_Navigation_Menu
 
             if ($depth > $prevDepth) {
                 // start new ul tag
-                if ($ulClass && $depth ==  0) {
-                    $ulClass = ' class="' . $ulClass . '"';
-                } else {
-                    $ulClass = '';
-                }
-                $html .= $myIndent . '<ul' . $ulClass . '>' . self::EOL;
+                //$html .= $myIndent . '<li class="nav-header">' . self::EOL;
             } else if ($prevDepth > $depth) {
                 // close li/ul tags until we're at current depth
                 for ($i = $prevDepth; $i > $depth; $i--) {
                     $ind = $indent . str_repeat('        ', $i);
                     $html .= $ind . '    </li>' . self::EOL;
-                    $html .= $ind . '</ul>' . self::EOL;
+                    //$html .= $ind . '</ul>' . self::EOL;
                 }
                 // close previous li tag
                 $html .= $myIndent . '    </li>' . self::EOL;
@@ -444,8 +439,12 @@ class Zend_View_Helper_Navigation_Menu
 
             // render li tag and page
             $liClass = $isActive ? ' class="active"' : '';
+            if ($depth <  $minDepth) {
+                $html .= $myIndent . '<li class="nav-header">' . $page->_label . self::EOL;
+            } else {
             $html .= $myIndent . '    <li' . $liClass . '>' . self::EOL
                    . $myIndent . '        ' . $this->htmlify($page) . self::EOL;
+            }
 
             // store as previous depth for next iteration
             $prevDepth = $depth;
@@ -504,6 +503,7 @@ class Zend_View_Helper_Navigation_Menu
                                        $options['minDepth'],
                                        $options['maxDepth'],
                                        $options['onlyActiveBranch']);
+            
         }
 
         return $html;

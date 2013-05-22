@@ -33,6 +33,11 @@ abstract class BaseController extends Zend_Controller_Action
 		$this->_session = $c->session;
 
 		$this->view->addScriptPath(APPLICATION_PATH . "/layouts/scripts/");
+		
+		// active navigation
+		$uri = $this->_request->getPathInfo();
+        $activeNav = $this->view->navigation()->findByUri($uri);
+        $activeNav->active = true;
 	}
 
 	/**

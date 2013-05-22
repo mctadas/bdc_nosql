@@ -9,7 +9,7 @@
 		    	<services>
 		    	    <label>Naujų paslaugų užsakymas</label>
 	   		        <uri>/services</uri>
-			   		
+	   		        			   		
 			   		<pages>
 			   		    <internet>
 			           		<label>Internetas namans</label>
