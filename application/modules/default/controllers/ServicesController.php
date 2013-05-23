@@ -15,6 +15,7 @@ class ServicesController extends BaseController {
 
     public function init() {
         parent::init();
+        $this->view->next_action = $this->getRequest()->getActionName();
     }
 
     public function indexAction() {

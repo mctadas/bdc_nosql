@@ -55,8 +55,14 @@ class AuthController extends BaseController
         if ($request->isPost()) {
             if ($form->isValid($request->getPost())) {
                 if ($this->_process($form->getValues())) {
-                    // We're authenticated! Redirect to the home page                    
-                    $this->_helper->redirector('index', 'account');
+                    // We're authenticated! Redirect to the home page
+                    
+                    $next = $this->_getParam('nc');
+                    if(isset($next)){
+                        $this->_redirect($this->_getParam('nc').'/'.$this->_getParam('na'));              
+                    } else {
+                        $this->_helper->redirector('index', 'account');
+                    }
                 }
             }
         }
