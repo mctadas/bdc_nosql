@@ -1,12 +1,16 @@
 <div class="span6">
     <div class="thumbnail">
     Box 1
-    <p><?php print_r($this->bill);?></p>
+    <div id="container_box1"></div>
+    <script type="text/javascript">
+      $(document).ready(function() {
+            $('#container_box1').load('/default/bills/last/format/html/');
+      });
+    </script>
     </div>
 </div>
 <div class="span6">
     <div class="thumbnail">
-    Box 2
-    <p>Lorem ipsum dolor sit amet, inani dolorum eum no, ei eum quodsi causae postulant, mea errem inciderint id. Mei in dicta alterum. Constituto inciderint pro an, ne has ludus fabulas. Eirmod aliquip eu eum, ex quem simul per.</p>
+    box2
     </div>
 </div>

@@ -20,7 +20,6 @@ class BillsController extends BaseController {
     public function init() {
         $this->_restricted = true;
         parent::init();
-                
     }
 
     public function indexAction()
@@ -82,6 +81,10 @@ class BillsController extends BaseController {
         
         // add one antry to db and rediredt to history page
         $this->_helper->redirector('history', 'bills');
-        
     }       
+    
+    public function lastAction()
+    {
+        $this->view->bill = $this->_getDiContainer()->billViewModel->get_random_bill();
+    }
 }

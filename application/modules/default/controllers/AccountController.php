@@ -11,9 +11,12 @@ class AccountController extends BaseController {
     public function init() {
         $this->_restricted = true;
         parent::init();
+        
+        
+        
+     
     }
 
     public function indexAction() {
-        $this->view->bill = $this->_getDiContainer()->billViewModel->get_random_bill();
     }       
 }

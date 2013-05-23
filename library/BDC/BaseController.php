@@ -29,22 +29,16 @@ abstract class BaseController extends Zend_Controller_Action
 	{
 		parent::init();
 
-		// create session namespace as "/module/controller/action/"
-		$sessionNamespace = '/' . $this->_getParam("module") . '/' . $this->_getParam("controller") . '/' . $this->_getParam("action") . '/';
-		$c = $this->_getDiContainer();
-		$c->session = function () use ($sessionNamespace) {
-					return new Session($sessionNamespace);
-				};
-		$this->_session = $c->session;
-
-		$this->view->addScriptPath(APPLICATION_PATH . "/layouts/scripts/");
+		$this->_createSessionNamespace();
+		$this->_setActiveNavigationLink();
+		$this->_dissableLayoutForAjax();
+		$this->_redirectToLoginIfRestricted();
 		
-		// meniu navigation set active links
-		$uri = $this->_request->getPathInfo();
-        $activeNav = $this->view->navigation()->findByUri($uri);
-        $activeNav->active = true;
-        
-        
+	}
+    
+    protected function _redirectToLoginIfRestricted()
+    {
+        // redirect to login page if it is restricted module
         $this->_user = $this->_getDiContainer()->sessionViewModel->
             get_session(Zend_Session::getId());
         if (empty($this->_user))
@@ -55,10 +49,39 @@ abstract class BaseController extends Zend_Controller_Action
             }
         } else {
             $this->view->username = $this->_user['username'];
-        }   
-        
-        
+        }
+    }
+    
+    protected function _dissableLayoutForAjax()
+    {
+        // disable layout and view if ajax request
+        if ($this->getRequest()->isXmlHttpRequest()) {
+            $this->_helper->layout->disableLayout();
+        }
+    }
+	
+	protected function _setActiveNavigationLink()
+	{
+	    // meniu navigation set active links
+		$uri = $this->_request->getPathInfo();
+        $activeNav = $this->view->navigation()->findByUri($uri);
+        $activeNav->active = true;
 	}
+	
+	protected function _createSessionNamespace()
+	{
+	    // create session namespace as "/module/controller/action/"
+		$sessionNamespace = '/' . $this->_getParam("module") . '/' . $this->_getParam("controller") . '/' . $this->_getParam("action") . '/';
+		$c = $this->_getDiContainer();
+		$c->session = function () use ($sessionNamespace) {
+					return new Session($sessionNamespace);
+				};
+		$this->_session = $c->session;
+
+		$this->view->addScriptPath(APPLICATION_PATH . "/layouts/scripts/");
+	}
+	
+	
 
 	/**
 	 * @return DiContainer
