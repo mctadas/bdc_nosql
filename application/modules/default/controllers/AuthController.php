@@ -45,7 +45,7 @@ class AuthController extends BaseController
 {
     public function init()
     {
-        /* Initialize action controller here */
+        parent::init();
     }
 
     public function indexAction()

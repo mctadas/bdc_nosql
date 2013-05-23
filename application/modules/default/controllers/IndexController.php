@@ -42,8 +42,61 @@ class IndexController extends BaseController {
             $user = $this->_getDiContainer()->userViewModel->get_user('a','a');
         }
         
-        $this->view->a = 'user:'.$user['username']." key:".$user['key'];
-     
+        $this->view->a = 'user:'.$user['username']." password:".$user['password'];
+        
+        // create services if they do not exist
+        $service = $this->_getDiContainer()->serviceViewModel->getRandomService();
+        
+        if(empty($service)){
+            $this->_getDiContainer()->serviceViewModel->createService(array( 'type'     => 'internet',
+                                                                             'label'    => 'Sviesolaidinis internetas',
+                                                                             'services' => array(
+                                                                                                array('label' => 'Para sviesolaidis',
+                                                                                                      'price' => '9,90 Lt/men. ',
+                                                                                                      'desc'  => 'description'),
+                                                                                                array('label' => 'Bazinis sviesolaidis',
+                                                                                                      'price' => '29,90 Lt/men. ',
+                                                                                                      'desc'  => 'description'),
+                                                                                                array('label' => 'Optimalus sviesolaidis',
+                                                                                                      'price' => '39,91 Lt/men. ',
+                                                                                                      'desc'  => 'description'),
+                                                                                                array('label' => 'Premium sviesolaidis',
+                                                                                                      'price' => '69,90 Lt/men. ',
+                                                                                                      'desc'  => 'description'),
+                                                                                                )));
+                                                                                                
+                                                                                                
+            $this->_getDiContainer()->serviceViewModel->createService(array( 'type'    => 'phone',
+                                                                             'label'    => 'Pagrindiniai pokalbiu planai ',
+                                                                             'services' => array(
+                                                                                                array('label' => '„Neribotas plius“',
+                                                                                                      'price' => '36,90 Lt/men. ',
+                                                                                                      'desc'  => 'description'),
+                                                                                                array('label' => '„Salyje plius“',
+                                                                                                      'price' => '14,00 Lt/men. ',
+                                                                                                      'desc'  => 'description'),
+                                                                                                array('label' => '„Mobilusis“',
+                                                                                                      'price' => '29,90 Lt/men. ',
+                                                                                                      'desc'  => 'description'),
+                                                                                                array('label' => '„Pasaulis plius“',
+                                                                                                      'price' => '29,90 Lt/men. ',
+                                                                                                      'desc'  => 'description'),
+                                                                                                array('label' => 'Bazinis plius',
+                                                                                                      'price' => '23,00 Lt/men. ',
+                                                                                                      'desc'  => 'description'),
+                                                                                                )));
+            $this->_getDiContainer()->serviceViewModel->createService(array( 'type'    => 'tv',
+                                                                             'label'    => 'Televizija',
+                                                                             'services' => array(
+                                                                                                array('label' => 'Televizija „Interaktyvioji GALA“',
+                                                                                                      'price' => '29,90 Lt/men. ',
+                                                                                                      'desc'  => 'description'),
+                                                                                                array('label' => 'Televizija „Skaitmenine GALA“',
+                                                                                                      'price' => '19,90 Lt/men. ',
+                                                                                                      'desc'  => 'description'),
+                                              
+                                                                                                )));
+        }
         
     }       
 }

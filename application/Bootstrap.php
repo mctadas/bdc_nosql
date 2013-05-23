@@ -137,6 +137,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         $c->billViewModel = function() use ($c) {
                         return new \ViewModel\Bill\Bill($c->db);
                     };
+                    
+        $c->serviceViewModel = function() use ($c) {
+                        return new \ViewModel\Service\Service($c->db);
+                    };
  
                 
 		$c->exampleViewModel = function() use ($c) {

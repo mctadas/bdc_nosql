@@ -18,14 +18,18 @@ class ServicesController extends BaseController {
     }
 
     public function indexAction() {
+    $this->view->services = $this->_getDiContainer()->serviceViewModel->getServices();
     }     
     
     public function internetAction() {
+        $this->view->services = $this->_getDiContainer()->serviceViewModel->getServices('internet');
     }
     
     public function telephoneAction() {
+        $this->view->services = $this->_getDiContainer()->serviceViewModel->getServices('phone');
     }
     
     public function televisionAction() {
+       $this->view->services = $this->_getDiContainer()->serviceViewModel->getServices('tv');
     }
 }

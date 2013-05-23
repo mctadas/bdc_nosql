@@ -34,6 +34,7 @@ abstract class BaseController extends Zend_Controller_Action
 		$this->_dissableLayoutForAjax();
 		$this->_redirectToLoginIfRestricted();
 		
+		
 	}
     
     protected function _redirectToLoginIfRestricted()
