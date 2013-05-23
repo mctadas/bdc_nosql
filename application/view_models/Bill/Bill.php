@@ -40,6 +40,14 @@ class Bill extends BaseReadModel
         
         return $db->$coll->find(array( 'ukey'  => $user_key), array ('pdf_doc' => 0, 'pdf_report' => 0 )); 
     }
+    
+    public function get_random_bill()
+    {
+        $db = $this->get_connection();
+        $coll = 'bills';
+        
+        return $db->$coll->findOne(array(), array ('pdf_doc' => 0, 'pdf_report' => 0 )); 
+    }
         
     public function get_bill_document($bill_id, $doc_key)
     {
