@@ -30,6 +30,7 @@ class BillsController extends BaseController {
 
     public function indexAction()
     {   
+        $this->_helper->redirector('pdfdownload', 'bills', 'default', array('id'=> '519dcc41cc6d9f8f06000000', 'doc'=>'pdf_doc'));
     }   
 
     protected function get_bill_document($bill_id, $doc_key)
@@ -55,7 +56,6 @@ class BillsController extends BaseController {
     
     public function pdfdownloadAction()
     {
-        $this->_helper->layout->disableLyout();
         $this->_helper->viewRenderer->setNoRender();
 
         $pdf = new Zend_Pdf($this->get_bill_document($this->_getParam('id'), $this->_getParam('doc')));

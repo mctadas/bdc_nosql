@@ -16,7 +16,7 @@
                 <td><?=$bill['type'];?></td>
                 <td>
                   <?php if($bill['has_doc']): ?>
-                  <a href="<?= $this->url(array('action'=>'pdfopen', 'controller'=>'bills', 'doc' => 'pdf_doc', 'id' => $bill['_id'])); ?>">
+                  <a href="<?= $this->url(array('action'=>'pdfdownload', 'controller'=>'bills', 'doc' => 'pdf_doc', 'id' => $bill['_id'])); ?>">
                     <img src='/styles/img/pdf_icon.png'>
                   </a>
                 <?php endif; ?>
@@ -25,7 +25,7 @@
                 <td><?=$bill['amount'];?></td>
                 <td>
                   <?php if($bill['has_report']): ?>
-                  <a href="<?= $this->url(array('action'=>'pdfopen', 'controller'=>'bills', 'doc' => 'pdf_report', 'id' => $bill['_id'])); ?>">
+                  <a href="<?= $this->url(array('action'=>'pdfdownload', 'controller'=>'bills', 'doc' => 'pdf_report', 'id' => $bill['_id'])); ?>">
                     <img src='/styles/img/pdf_icon.png'>
                   </a>
                 <?php endif; ?>
