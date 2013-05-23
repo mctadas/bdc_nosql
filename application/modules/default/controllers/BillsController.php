@@ -18,14 +18,9 @@ class BillsController extends BaseController {
     private $_exampleReadModel;
 
     public function init() {
+        $this->_restricted = true;
         parent::init();
-        
-        $this->_user = $this->_getDiContainer()->sessionViewModel->
-            get_session(Zend_Session::getId());
-        if (empty($this->_user))
-        {
-            $this->_helper->redirector('index', 'auth');
-        }
+                
     }
 
     public function indexAction()

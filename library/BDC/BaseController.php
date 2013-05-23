@@ -3,10 +3,14 @@
 namespace BDC;
 
 use \BDC\Session;
+
 // Zend
 use \Zend_Controller_Action;
 use \Zend_Registry;
 use \Zend_Session_Namespace;
+use \Zend_Session;
+
+//use ViewModel\Session\Session;
 
 /**
  * @package Kompro 
@@ -19,6 +23,7 @@ abstract class BaseController extends Zend_Controller_Action
 	 */
 	protected $_session;
 	protected $_user;
+	protected $_restricted = false;
 
 	public function init() 
 	{
@@ -34,10 +39,25 @@ abstract class BaseController extends Zend_Controller_Action
 
 		$this->view->addScriptPath(APPLICATION_PATH . "/layouts/scripts/");
 		
-		// active navigation
+		// meniu navigation set active links
 		$uri = $this->_request->getPathInfo();
         $activeNav = $this->view->navigation()->findByUri($uri);
         $activeNav->active = true;
+        
+        
+        $this->_user = $this->_getDiContainer()->sessionViewModel->
+            get_session(Zend_Session::getId());
+        if (empty($this->_user))
+        {
+            if ($this->_restricted)
+            {
+                $this->_helper->redirector('index', 'auth');
+            }
+        } else {
+            $this->view->username = $this->_user['username'];
+        }   
+        
+        
 	}
 
 	/**
