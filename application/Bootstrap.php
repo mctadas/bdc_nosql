@@ -19,7 +19,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		$dbResource = $this->getPluginResource('multidb');
 		if ($dbResource) {
 			$db = $dbResource->getDb('local');
-			Zend_Registry::set('db', new \Shanty_Mongo_Document);
+			Zend_Registry::set('db', $db);//new \Shanty_Mongo_Document);
 
 			$dbNormalizer = $dbResource->getDb('normalizer');
 			Zend_Registry::set('db_normalizer', $dbNormalizer);

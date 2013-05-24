@@ -22,7 +22,7 @@ abstract class BaseModel
 	/**
 	 * @param Zend_Db_Adapter_Abstract $db 
 	 */
-	public function __construct(\Shanty_Mongo_Document $db) 
+	public function __construct( $db) 
 	{
 		$this->_db = $db;
 	}
