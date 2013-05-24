@@ -2,26 +2,12 @@
 
 namespace ViewModel\Bill    ;
 
-// Lib
-use \MongoClient;
 use \MongoId;
 use BDC\Models\BaseReadModel;
 
 class Bill extends BaseReadModel
 {
     protected static $_collection = 'bills';
-    protected $_conn;
-    
-    public function get_connection()
-    {
-        if(empty($this->_conn))
-        {
-            $m = new MongoClient();
-            $this->_conn = $m->mt;
-        }
-        return $this->_conn;
-             
-    }
     
     public function save(array $bill_doc ,$user_key)
     {

@@ -2,25 +2,11 @@
 
 namespace ViewModel\User;
 
-// Lib
-use \MongoClient;
 use BDC\Models\BaseReadModel;
 
 class User extends BaseReadModel
 {
     protected static $_collection = 'users';
-    protected $_conn;
-    
-    public function get_connection()
-    {
-        if(empty($this->_conn))
-        {
-            $m = new MongoClient();
-            $this->_conn = $m->mt;
-        }
-        return $this->_conn;
-             
-    }
     
     public function create_user($username, $password, $key, $type='DUMMY')
     {

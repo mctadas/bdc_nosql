@@ -2,26 +2,12 @@
 
 namespace ViewModel\Service;
 
-// Lib
-use \MongoClient;
 use \MongoId;
 use BDC\Models\BaseReadModel;
 
 class Service extends BaseReadModel
 {
     protected static $_collection = 'services';
-    protected $_conn;
-    
-    public function get_connection()
-    {
-        if(empty($this->_conn))
-        {
-            $m = new MongoClient();
-            $this->_conn = $m->mt;
-        }
-        return $this->_conn;
-             
-    }
     
     public function createService(array $service)
     {
