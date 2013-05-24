@@ -14,23 +14,18 @@ use BDC\DownloadManager;
 use ViewModel\User\User;
 
 
-class RabbitMQController extends BaseController {
-
-
-    /**
-     * @var Example
-     */
-    private $_exampleReadModel;
+class RabbitController extends BaseController {
 
     public function init() {
         parent::init();
     }
-
+    
     public function indexAction() {
-    	error_reporting(E_ALL);
-        ini_set('display_errors', 'On');
-		
-// RabbitMQ
+    	$this->listmessageAction();
+    }
+
+    public function sendmessageAction() {
+		// RabbitMQ
 
         /**
          * Filename: send.php
@@ -63,7 +58,10 @@ class RabbitMQController extends BaseController {
         } else {
             echo 'Message sent!', PHP_EOL;
         }
-        
+    }
+    
+    public function listmessageAction() {
+    
         /**
          * Filename: receive.php
          * Purpose:
@@ -89,6 +87,7 @@ class RabbitMQController extends BaseController {
             echo ($envelope->isRedelivery()) ? 'Redelivery' : 'New Message';
             echo PHP_EOL;
             echo $envelope->getBody(), PHP_EOL;
+            echo "<p></p>";
         }
 
     }

@@ -1,3 +1,6 @@
 /nbproject/private/
 .DS_Store
 *~
+.metadata*
+.project*
+.settings*
