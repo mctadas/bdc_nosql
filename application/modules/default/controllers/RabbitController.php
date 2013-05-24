@@ -52,7 +52,7 @@ class RabbitController extends BaseController {
         $queue->setName('queue1');
         $queue->declare();
 
-        $message    = $exchange->publish('Custom Message (ts): '.time(), 'key1');
+        $message    = $exchange->publish( 'user:'.$this->_getParam('user').', '. $this->_getParam('service').' (ts): '.time(), 'key1');
         if (!$message) {
             echo 'Message not sent', PHP_EOL;
         } else {
