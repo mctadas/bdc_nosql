@@ -12,10 +12,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		Zend_Session::start();
 	}
 
-
 	protected function _initDb() 
 	{
-	    $this->bootstrap('multidb');
+		$this->bootstrap('multidb');
 
 		$dbResource = $this->getPluginResource('multidb');
 		if ($dbResource) {
