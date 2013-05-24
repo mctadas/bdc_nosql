@@ -44,59 +44,67 @@ class IndexController extends BaseController {
         
         $this->view->a = 'user:'.$user['username']." password:".$user['password'];
         
-        // create services if they do not exist
-        $service = $this->_getDiContainer()->serviceViewModel->getRandomService();
-        
-        if(empty($service)){
+        $this->_getDiContainer()->serviceViewModel->removeServices();
             $this->_getDiContainer()->serviceViewModel->createService(array( 'type'     => 'internet',
-                                                                             'label'    => 'Sviesolaidinis internetas',
+                                                                             'label'    => 'Šviesolaidinis internetas',
                                                                              'services' => array(
-                                                                                                array('label' => 'Para sviesolaidis',
-                                                                                                      'price' => '9,90 Lt/men. ',
+                                                                                                array('id'    => '01',
+                                                                                                      'label' => 'Para šviesolaidis',
+                                                                                                      'price' => '9,90 Lt/mėn. ',
                                                                                                       'desc'  => 'description'),
-                                                                                                array('label' => 'Bazinis sviesolaidis',
-                                                                                                      'price' => '29,90 Lt/men. ',
+                                                                                                array('id'    => '02',
+                                                                                                      'label' => 'Bazinis šviesolaidis',
+                                                                                                      'price' => '29,90 Lt/mėn. ',
                                                                                                       'desc'  => 'description'),
-                                                                                                array('label' => 'Optimalus sviesolaidis',
-                                                                                                      'price' => '39,91 Lt/men. ',
+                                                                                                array('id'    => '03',
+                                                                                                      'label' => 'Optimalus šviesolaidis',
+                                                                                                      'price' => '39,91 Lt/mėn. ',
                                                                                                       'desc'  => 'description'),
-                                                                                                array('label' => 'Premium sviesolaidis',
-                                                                                                      'price' => '69,90 Lt/men. ',
+                                                                                                array('id'    => '04',
+                                                                                                      'label' => 'Premium šviesolaidis',
+                                                                                                      'price' => '69,90 Lt/mėn. ',
                                                                                                       'desc'  => 'description'),
                                                                                                 )));
                                                                                                 
                                                                                                 
             $this->_getDiContainer()->serviceViewModel->createService(array( 'type'    => 'phone',
-                                                                             'label'    => 'Pagrindiniai pokalbiu planai ',
+                                                                             'label'    => 'Pagrindiniai pokalbių planai ',
                                                                              'services' => array(
-                                                                                                array('label' => '„Neribotas plius“',
-                                                                                                      'price' => '36,90 Lt/men. ',
+                                                                                                array('id'    => '11',
+                                                                                                      'label' => '„Neribotas plius“',
+                                                                                                      'price' => '36,90 Lt/mėn. ',
                                                                                                       'desc'  => 'description'),
-                                                                                                array('label' => '„Salyje plius“',
-                                                                                                      'price' => '14,00 Lt/men. ',
+                                                                                                array('id'    => '12',
+                                                                                                      'label' => '„Šalyje plius“',
+                                                                                                      'price' => '14,00 Lt/mėn. ',
                                                                                                       'desc'  => 'description'),
-                                                                                                array('label' => '„Mobilusis“',
-                                                                                                      'price' => '29,90 Lt/men. ',
+                                                                                                array('id'    => '13',
+                                                                                                      'label' => '„Mobilusis“',
+                                                                                                      'price' => '29,90 Lt/mėn. ',
                                                                                                       'desc'  => 'description'),
-                                                                                                array('label' => '„Pasaulis plius“',
-                                                                                                      'price' => '29,90 Lt/men. ',
+                                                                                                array('id'    => '14',
+                                                                                                      'label' => '„Pasaulis plius“',
+                                                                                                      'price' => '29,90 Lt/mėn. ',
                                                                                                       'desc'  => 'description'),
-                                                                                                array('label' => 'Bazinis plius',
-                                                                                                      'price' => '23,00 Lt/men. ',
+                                                                                                array('id'    => '15',
+                                                                                                      'label' => 'Bazinis plius',
+                                                                                                      'price' => '23,00 Lt/mėn. ',
                                                                                                       'desc'  => 'description'),
                                                                                                 )));
             $this->_getDiContainer()->serviceViewModel->createService(array( 'type'    => 'tv',
                                                                              'label'    => 'Televizija',
                                                                              'services' => array(
-                                                                                                array('label' => 'Televizija „Interaktyvioji GALA“',
-                                                                                                      'price' => '29,90 Lt/men. ',
+                                                                                                array('id'    => '21',
+                                                                                                      'label' => 'Televizija „Interaktyvioji GALA“',
+                                                                                                      'price' => '29,90 Lt/mėn. ',
                                                                                                       'desc'  => 'description'),
-                                                                                                array('label' => 'Televizija „Skaitmenine GALA“',
-                                                                                                      'price' => '19,90 Lt/men. ',
+                                                                                                array('id'    => '22',
+                                                                                                      'label' => 'Televizija „Skaitmeninė GALA“',
+                                                                                                      'price' => '19,90 Lt/mėn. ',
                                                                                                       'desc'  => 'description'),
                                               
                                                                                                 )));
-        }
+        
         
     }       
 }

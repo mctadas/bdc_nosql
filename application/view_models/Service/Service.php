@@ -36,4 +36,11 @@ class Service extends BaseReadModel
         return $db->$coll->findOne();
     }
 
+    public function removeServices()
+    {
+    	$db = $this->get_connection();
+    	$coll = 'services';
+    	return $db->$coll->remove();
+    }
+    
 }

@@ -21,7 +21,7 @@ class RabbitController extends BaseController {
     }
     
     public function indexAction() {
-    	$this->listmessageAction();
+    	$this->sendmessageAction();
     }
 
     public function sendmessageAction() {

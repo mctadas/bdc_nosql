@@ -6,16 +6,16 @@
         <?php foreach($service['services'] as $item): ?>
             <div class="span3" >
                 <div class="thumbnail" style="text-align: center; padding:10px; margin-bottom: 25px;">
-                    <p><?=$item['label'];?></p>
-                    <p><?=$item['price'];?></p>
-                    <div id="container_<?=$service['_id']?>">
+                    <div id="container_<?=$item['id']?>">
+                        <p><?=$item['label'];?></p>
+                        <p><?=$item['price'];?></p>
                         <?php if(isset($this->username)):?>
-                        <p><?=$item['desc'];?></p>
-                            <a href="#order" id="btn_<?=$service['_id']?>" role="button" class="btn" data-toggle="modal">Užsakyti</a>
+                            <p><?=$item['desc'];?></p>
+                            <a href="#order" id="btn_<?=$item['id']?>" role="button" class="btn" data-toggle="modal">Užsakyti</a>
                             <script type="text/javascript">
                               $(document).ready(function() {
-                                 $("#btn_<?=$service['_id']?>").click(function(){
-                                    $('.container_01').load('/default/services/order/id/<?=$service['_id']?>/format/html/');
+                                 $("#btn_<?=$item['id']?>").click(function(){
+                                    $('#container_<?=$item['id']?>').load('/default/rabbit/sendmessage/service/<?=$item['id']?>/user/<?=$this->username?>/format/html/');
                                  });
                               });
                             </script>
