@@ -1,0 +1,9 @@
+<? if (!empty($this->errors)): ?>
+    <div class="msg msg-error">
+        <ul class="<?= (count($this->errors) > 1 ? '' : 'errorone'); ?>">
+            <? foreach ($this->errors as $error): ?>
+                <li><?=$error;?></li>
+            <? endforeach; ?>
+        </ul>
+    </div>
+<? endif; ?>

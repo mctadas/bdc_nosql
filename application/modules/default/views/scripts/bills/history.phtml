@@ -1,0 +1,37 @@
+
+<table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Data</th>
+                <th colspan="2">Mokėjimai / Sąskaitos</th>
+                <th>Laikotarpis</th>
+                <th>Suma</th>
+                <th colspan="2">Skambučių sąrašas</th>
+              </tr>
+            </thead>
+            <tbody>
+            <? foreach ($this->bills as $bill): ?>
+              <tr>
+                <td><?=$bill['date'];?></td>
+                <td><?=$bill['type'];?></td>
+                <td>
+                  <?php if($bill['has_doc']): ?>
+                  <a href="<?= $this->url(array('action'=>'pdfdownload', 'controller'=>'bills', 'doc' => 'pdf_doc', 'id' => $bill['_id'])); ?>">
+                    <img src='/styles/img/pdf_icon.png'>
+                  </a>
+                <?php endif; ?>
+                </td>
+                <td><?=$bill['period'];?></td>
+                <td><?=$bill['amount'];?></td>
+                <td>
+                  <?php if($bill['has_report']): ?>
+                  <a href="<?= $this->url(array('action'=>'pdfdownload', 'controller'=>'bills', 'doc' => 'pdf_report', 'id' => $bill['_id'])); ?>">
+                    <img src='/styles/img/pdf_icon.png'>
+                  </a>
+                <?php endif; ?>
+                </td>
+                <td><?=$bill['paid'];?></td>
+              </tr>
+            <? endforeach; ?>
+            </tbody>
+          </table>

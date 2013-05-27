@@ -1,0 +1,76 @@
+body, html {
+    margin: 0px;
+    padding: 0px;
+}
+
+div#body {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div#header {
+    border-bottom: 1px solid black;
+    position: relative;
+}
+
+div#logo {
+    float: left;
+    width: 100px;
+    height: 50px;
+}
+
+div#userInfo {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+div#content {
+    padding: 15px;
+}
+
+div#menu {
+    padding-top: 25px;
+}
+
+.clear {
+    clear: both;
+}
+
+table#login-content-container {
+    width:600px;
+    border-collapse: collapse;
+    border:1px red solid;
+    margin:0px auto;
+    text-align: left;
+}
+
+table#login-content-container td {
+    vertical-align: middle;
+}
+
+div#login-content {
+    
+}
+
+.msg.msg-error {
+    color:red;
+}
+
+.msg.msg-ok {
+    border:1px green solid;
+    color:green;
+}
+
+.error {
+    color:red;
+}
+
+table.border1 {
+    border-collapse: collapse;
+}
+
+table.border1 td {
+    border:1px black solid;
+}

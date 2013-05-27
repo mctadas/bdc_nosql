@@ -1,0 +1,40 @@
+<table cellpadding="2" cellspacing="2" border="1">
+    <thead>
+        <tr>
+            <th>Adapter</th>
+            <th>Class name</th>
+            <th>Priority</th>
+            <th>Time added to queue</th>
+            <th>Time removed from queue</th>
+            <th>Attributes</th>
+            <th>Events fired</th>
+            <th>Commands fired</th>
+            <th>Peak mem usage</th>
+            <th>Time method to process</th>
+            <th>Time publishing events</th>
+            <th>Time saving events</th>
+            <th>Time total</th>
+            <th>Date added to log</th>
+        </tr>
+    </thead>
+    <tbody>
+        <? foreach( $this->adapterLogList as $item) : ?>
+            <tr>
+                <td><?=$item['adapter']?></td>
+                <td><?=$item['class_name']?></td>
+                <td><?=$item['priority']?></td>
+                <td><?=date("Y-m-d H:i:s", $item['time_added_to_queue'])?></td>
+                <td><?=date("Y-m-d H:i:s", $item['time_removed_from_queue'])?></td>
+                <td><?=var_dump(unserialize($item['attributes']))?></td>
+                <td><?=$item["events_fired"]?></td>
+                <td><?=$item['commands_fired']?></td>
+                <td><?=$item['peak_memory_usage']?></td>
+                <td><?=$item['time_took_method_to_process']?></td>
+                <td><?=$item['time_took_publishing_events']?></td>
+                <td><?=$item['time_took_saving_events']?></td>
+                <td><?=$item['time_total']?></td>
+                <td><?=$item['date']?></td>
+            </tr>
+        <? endforeach; ?>
+    </tbody>
+</table>

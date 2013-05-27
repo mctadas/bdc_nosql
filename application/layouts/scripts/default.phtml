@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ManoTEO</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="/styles/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <script src="http://code.jquery.com/jquery.js"></script>
+    <script src="/styles/bootstrap/js/bootstrap.min.js"></script>
+    
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+
+      @media (max-width: 980px) {
+        /* Enable use of floated navbar text */
+        .navbar-text.pull-right {
+          float: none;
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
+    </style>
+    
+    
+  </head>
+  <body>
+    
+        <!-- Login Modal -->
+        <div id="login" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">Prisijungti</h3>
+            </div>
+        <div class="modal-body">
+            <p class="login-content"></p>
+        </div>
+      </div>
+    
+      <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+          <div class="container-fluid">
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="brand" href="<?= $this->url(array('action'=>'index','controller'=>'index'));?>">Mano TEO</a>
+            <div class="nav-collapse collapse">
+              <p class="navbar-text pull-right">
+                <?php if(isset($this->username)):?>
+                Jūs prisijungęs kaip: <a href="#" class="navbar-link"><?=$this->username;?></a>
+                <a href="<?= $this->url(array('action'=>'logout','controller'=>'auth')); ?>">atsijungti</a>
+                <?php else: ?>
+                <a href="<?= $this->url(array('action'=>'index','controller'=>'auth')); ?>">prisijungti</a>
+                <?php endif; ?>
+              </p>
+              <ul class="nav">
+                <li><a href="<?= $this->url(array('action'=>'index','controller'=>'services')); ?>">Mano paslaugos</a></li>
+                <li><a href="<?= $this->url(array('action'=>'index','controller'=>'bills')); ?>">Sąskaitos</a></li>
+              </ul>
+            </div><!--/.nav-collapse -->
+         </div>
+        </div>
+      </div>
+    
+      <div class="container-fluid">
+          <div class="row-fluid">
+            <div class="span3">
+                <div class="well sidebar-nav">
+                    <?php echo $this->navigation()->menu()->setMinDepth(1); ?>
+	            </div><!--/.well -->
+	            <a class="brand" href="<?= $this->url(array('action'=>'listmessage','controller'=>'rabbit'));?>">išsiųsti užsakymai</a>
+            </div><!--/span-->
+            <div class="span9">
+                <?php echo $this->layout()->content; ?>	
+            </div>
+         </div>
+      
+   
+        <footer>
+        </footer>
+
+      </div><!--/.fluid-container-->
+
+  
+  </body>
+</html>

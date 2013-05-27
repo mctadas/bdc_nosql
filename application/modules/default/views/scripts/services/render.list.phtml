@@ -1,0 +1,38 @@
+<?php foreach($this->services as $service): ?>
+    <p></p>
+    <div class="span10">
+        <h3><?=$service['label'];?></h3>
+        
+        <?php foreach($service['services'] as $item): ?>
+            <div class="span3" >
+                <div class="thumbnail" style="text-align: center; padding:10px; margin-bottom: 25px;">
+                    <div id="container_<?=$item['id']?>">
+                        <p><?=$item['label'];?></p>
+                        <p><?=$item['price'];?></p>
+                        <?php if(isset($this->username)):?>
+                            <p><?=$item['desc'];?></p>
+                            <a href="#order" id="btn_<?=$item['id']?>" role="button" class="btn" data-toggle="modal">Užsakyti</a>
+                            <script type="text/javascript">
+                              $(document).ready(function() {
+                                 $("#btn_<?=$item['id']?>").click(function(){
+                                    $('#container_<?=$item['id']?>').load('/default/rabbit/sendmessage/service/<?=$item['id']?>/user/<?=$this->username?>/format/html/');
+                                 });
+                              });
+                            </script>
+                        <?php else: ?>
+                            <a href="#login" role="button" class="btn" data-toggle="modal">Užsakyti</a>
+                            <script type="text/javascript">
+                              $(document).ready(function() {
+                                 $(".btn").click(function(){
+                                    $('.login-content').load('/default/auth/index/nc/services/na/<?=$this->next_action?>/format/html/');
+                                 });
+                              });
+                            </script>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+<?php endforeach; ?>
+

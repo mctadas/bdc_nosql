@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configdata>
+    <nav>
+    	<home>
+	   		<label>Mano TEO</label>
+	   		<uri>/</uri>
+	   		
+	   		<pages>
+		    	<services>
+		    	    <label>Naujų paslaugų užsakymas</label>
+	   		        <uri>/services</uri>
+	   		        			   		
+			   		<pages>
+			   		    <internet>
+			           		<label>Internetas namans</label>
+			           		<uri>/services/internet</uri>
+			       		</internet> 
+			       		<telephone>
+			           		<label>Telefonas namams</label>
+			           		<uri>/services/telephone</uri>    	
+			            </telephone>
+			            <television>
+			           		<label>Televizija namams</label>
+			           		<uri>/services/television</uri>    	
+			            </television>
+			   		</pages>    	
+			   		
+		    	</services>
+		    	<bills>
+		    	    <label>Sąskaitos ir mokėjimai</label>
+	   		        <uri>/bills</uri>
+	   		        
+	   		        <pages>
+			   		    <history>
+			           		<label>Atsiskaitymų istorija</label>
+			           		<uri>/bills/history</uri>
+			       		</history> 
+			       		<management>
+			           		<label>Sąskaitų valdymas</label>
+			           		<uri>/bills/manage</uri>    	
+			            </management>
+			   		</pages>    
+		    	</bills>
+  				    
+	   		</pages>
+	   		    	
+    	</home>
+    	
+    	
+    	
+   	</nav>
+</configdata>
