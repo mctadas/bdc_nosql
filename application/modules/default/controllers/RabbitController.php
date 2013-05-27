@@ -24,6 +24,28 @@ class RabbitController extends BaseController {
     	$this->sendmessageAction();
     }
 
+<<<<<<< HEAD
+=======
+
+    public function getConnection()
+    {
+        shuffle($this->_cluster);
+foreach($this->_cluster as $host) {        
+
+            $connection = new AMQPConnection();
+            $connection->setHost($host);
+            try {
+                $connection->connect();
+            } catch ( Exception $e) { continue; }
+        
+            if (!$connection->isConnected()) {
+            die('Not connected :(' . PHP_EOL);
+            }
+            return $connection;
+        }
+    }
+
+>>>>>>> 894a67d... mistype fix
     public function sendmessageAction() {
 		// RabbitMQ
 
