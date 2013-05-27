@@ -1,6 +1,5 @@
 <?php
 
-// Lib
 use \AMQPConnection;
 use \AMQPChannel;
 use \AMQPExchange;
