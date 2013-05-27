@@ -16,12 +16,35 @@ use ViewModel\User\User;
 
 class RabbitController extends BaseController {
 
+
+    protected $_cluster = array('srvexa1','srvexa5','localhost');
+
     public function init() {
         parent::init();
     }
     
     public function indexAction() {
     	$this->sendmessageAction();
+    }
+
+
+    public function getConnection()
+    {
+        shuffle($this->_cluster);
+        foreach($this->_cluster as $host) {        
+
+            $connection = new AMQPConnection();
+            $connection->setHost($host);
+            try {
+                $connection->connect();
+            } catch ( Exception $e) { continue; }
+        
+            if (!$connection->isConnected()) {
+            die('Not connected :(' . PHP_EOL);
+            }
+            
+            return $connection;
+        }
     }
 
     public function sendmessageAction() {
@@ -35,11 +58,8 @@ class RabbitController extends BaseController {
          * Exchange Type: fanout
          * Queue Name: queue1
          */
-        $connection = new AMQPConnection();
-        $connection->connect();
-        if (!$connection->isConnected()) {
-            die('Not connected :(' . PHP_EOL);
-        }
+	$connection = $this->getConnection();
+	
         // Open Channel
         $channel    = new AMQPChannel($connection);
         // Declare exchange
@@ -70,11 +90,8 @@ class RabbitController extends BaseController {
          * Exchange Type: fanout
          * Queue Name: queue1
          */
-        $connection = new AMQPConnection();
-        $connection->connect();
-        if (!$connection->isConnected()) {
-            die('Not connected :('. PHP_EOL);
-        }
+        $connection = $this->getConnection();
+        
         // Open channel
         $channel    = new AMQPChannel($connection);
         // Open Queue and bind to exchange

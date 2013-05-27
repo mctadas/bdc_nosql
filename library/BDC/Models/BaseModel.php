@@ -27,13 +27,14 @@ abstract class BaseModel
 		$this->_db = $db;
 	}
     
-	public function get_connection()
+    public function get_connection()
     {
+
         if(empty($this->_conn))
         {
             if(APPLICATION_ENV == 'production')
             {
-                $m = new MongoClient('mongodb://10.248.2.24:27017');
+                $m = new MongoClient('mongodb://10.248.2.20:27017');
             } else {
                 $m = new MongoClient('mongodb://localhost:27017');
             }
