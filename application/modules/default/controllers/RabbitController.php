@@ -31,7 +31,7 @@ class RabbitController extends BaseController {
     public function getConnection()
     {
         shuffle($this->_cluster);
-        foreach($this->_cluster as $host) {        
+foreach($this->_cluster as $host) {        
 
             $connection = new AMQPConnection();
             $connection->setHost($host);
@@ -42,7 +42,6 @@ class RabbitController extends BaseController {
             if (!$connection->isConnected()) {
             die('Not connected :(' . PHP_EOL);
             }
-            
             return $connection;
         }
     }
