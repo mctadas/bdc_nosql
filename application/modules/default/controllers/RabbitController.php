@@ -1,6 +1,5 @@
 <?php
 
-// Lib
 use \AMQPConnection;
 use \AMQPChannel;
 use \AMQPExchange;
@@ -16,8 +15,7 @@ use ViewModel\User\User;
 
 class RabbitController extends BaseController {
 
-
-    protected $_cluster = array('srvexa1','srvexa5','localhost');
+    protected $_cluster = array('srvexa1', 'srvexa5', 'localhost');
 
     public function init() {
         parent::init();
@@ -31,8 +29,7 @@ class RabbitController extends BaseController {
     public function getConnection()
     {
         shuffle($this->_cluster);
-foreach($this->_cluster as $host) {        
-
+        foreach($this->_cluster as $host) {        
             $connection = new AMQPConnection();
             $connection->setHost($host);
             try {
@@ -57,8 +54,8 @@ foreach($this->_cluster as $host) {
          * Exchange Type: fanout
          * Queue Name: queue1
          */
-	$connection = $this->getConnection();
-	
+        $connection = $this->getConnection();
+        
         // Open Channel
         $channel    = new AMQPChannel($connection);
         // Declare exchange
