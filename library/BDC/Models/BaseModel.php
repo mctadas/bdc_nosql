@@ -37,7 +37,7 @@ abstract class BaseModel
                 $m = new MongoClient('mongodb://srvexa4:27017,srvexa6:27017', array('replicaSet' => 'mySet'));
             } else {
                 $m = new MongoClient('mongodb://localhost:27017');
-            } catch (Exception $e){var_dump($e); die;}
+            }
             $this->_conn = $m->mt;
         }
         return $this->_conn;
