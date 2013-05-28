@@ -34,10 +34,10 @@ abstract class BaseModel
         {
             if(APPLICATION_ENV == 'production')
             {
-                $m = new MongoClient('mongodb://10.248.2.20:27017');
+                $m = new MongoClient('mongodb://srvexa4:27017,srvexa6:27017', array('replicaSet' => 'mySet'));
             } else {
                 $m = new MongoClient('mongodb://localhost:27017');
-            }
+            } catch (Exception $e){var_dump($e); die;}
             $this->_conn = $m->mt;
         }
         return $this->_conn;
