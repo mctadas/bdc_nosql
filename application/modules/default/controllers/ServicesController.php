@@ -16,6 +16,7 @@ class ServicesController extends BaseController {
     public function init() {
         parent::init();
         $this->view->next_action = $this->getRequest()->getActionName();
+        $this->view->user_services = $this->_getDiContainer()->userViewModel->getUserSercives($this->_user['username']);
     }
 
     public function indexAction() {

@@ -106,14 +106,25 @@ class RabbitController extends BaseController {
         $queue->declare();
         // Prevent message redelivery with AMQP_AUTOACK param
         while ($envelope = $queue->get(AMQP_AUTOACK)) {
-            echo ($envelope->isRedelivery()) ? 'Redelivery' : 'New Message';
-            echo PHP_EOL;
+            //echo ($envelope->isRedelivery()) ? 'Redelivery' : 'New Message';
+            //echo PHP_EOL;
             $message = $envelope->getBody();
             $message = json_decode($message);
-            print_r( $message );
+            
+            $this->handle($message);
             echo "<p></p>";
         }
 
     }
-
+    
+    public function handle($event)
+    {
+    	switch ($event->type){
+    		case 'order':
+    			$this->_getDiContainer()->userViewModel
+    				->addService($event->data->user_id, $event->data->service);
+    			break;
+    	}
+    	
+    }
 }

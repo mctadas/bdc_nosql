@@ -142,8 +142,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
                             return new \ViewModel\Service\Service($c->db);
                         };
                         
-            $c->serviceUpdater = function() use ($c) {
-                            return new \ViewModel\Service\EventHandler\Updater($c->db);
+            $c->eventHandler = function() use ($c) {
+                            return new \ViewModel\Event\EventHandler($c->db);
                         };
                 
 		$c->exampleViewModel = function() use ($c) {

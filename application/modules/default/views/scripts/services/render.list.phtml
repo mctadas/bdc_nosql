@@ -10,15 +10,19 @@
                         <p><?=$item['label'];?></p>
                         <p><?=$item['price'];?></p>
                         <?php if(isset($this->username)):?>
-                            <p><?=$item['desc'];?></p>
-                            <a href="#order" id="btn_<?=$item['id']?>" role="button" class="btn" data-toggle="modal">Užsakyti</a>
-                            <script type="text/javascript">
-                              $(document).ready(function() {
-                                 $("#btn_<?=$item['id']?>").click(function(){
-                                    $('#container_<?=$item['id']?>').load('/default/rabbit/sendmessage/service/<?=$item['id']?>/user/<?=$this->username?>/format/html/');
-                                 });
-                              });
-                            </script>
+                        	<?php if(in_array($item['id'], $this->user_services)):?>
+                        	<p>Paslauga užsakyta</p>
+                        	<?php else: ?>
+	                            <p><?=$item['desc'];?></p>
+	                            <a href="#order" id="btn_<?=$item['id']?>" role="button" class="btn" data-toggle="modal">Užsakyti</a>
+	                            <script type="text/javascript">
+	                              $(document).ready(function() {
+	                                 $("#btn_<?=$item['id']?>").click(function(){
+	                                    $('#container_<?=$item['id']?>').load('/default/rabbit/sendmessage/service/<?=$item['id']?>/user/<?=$this->username?>/format/html/');
+	                                 });
+	                              });
+	                            </script>
+	                        <?php endif; ?>
                         <?php else: ?>
                             <a href="#login" role="button" class="btn" data-toggle="modal">Užsakyti</a>
                             <script type="text/javascript">
