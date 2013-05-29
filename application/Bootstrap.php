@@ -126,22 +126,25 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 //				};
 
 		 //View models
-        $c->userViewModel = function() use ($c) {
-                return new \ViewModel\User\User($c->db);
-            };
-                    
-        $c->sessionViewModel = function() use ($c) {
-                        return new \ViewModel\Session\Session($c->db);
-                    };
- 
-        $c->billViewModel = function() use ($c) {
-                        return new \ViewModel\Bill\Bill($c->db);
-                    };
-                    
-        $c->serviceViewModel = function() use ($c) {
-                        return new \ViewModel\Service\Service($c->db);
-                    };
- 
+            $c->userViewModel = function() use ($c) {
+                    return new \ViewModel\User\User($c->db);
+                };
+
+            $c->sessionViewModel = function() use ($c) {
+                            return new \ViewModel\Session\Session($c->db);
+                        };
+
+            $c->billViewModel = function() use ($c) {
+                            return new \ViewModel\Bill\Bill($c->db);
+                        };
+
+            $c->serviceViewModel = function() use ($c) {
+                            return new \ViewModel\Service\Service($c->db);
+                        };
+                        
+            $c->serviceUpdater = function() use ($c) {
+                            return new \ViewModel\Service\EventHandler\Updater($c->db);
+                        };
                 
 		$c->exampleViewModel = function() use ($c) {
 					return new \ViewModel\Example\Example($c->db);

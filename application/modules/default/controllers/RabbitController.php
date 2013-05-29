@@ -12,6 +12,7 @@ use BDC\DownloadManager;
 
 use ViewModel\User\User;
 
+use ViewModel\Service\EventHandler\Updater;
 
 class RabbitController extends BaseController {
 
@@ -68,11 +69,19 @@ class RabbitController extends BaseController {
         $queue->setName('queue1');
         $queue->declare();
 
-        $message    = $exchange->publish( 'user:'.$this->_getParam('user').', '. $this->_getParam('service').' (ts): '.time(), 'key1');
+        $messageText = array(
+            "type" => "order",
+            "data" => array(
+                "user_id" => $this->_getParam("user"),
+                "service" => $this->_getParam("service"),
+            ),
+        );
+        
+        $message    = $exchange->publish( json_encode($messageText)  );
         if (!$message) {
-            echo 'Message not sent', PHP_EOL;
+            echo 'Atsiprašome, įvyko klaida', PHP_EOL;
         } else {
-            echo 'Message sent!', PHP_EOL;
+            echo 'Vyksta paslaugos užsakymas', PHP_EOL;
         }
     }
     
@@ -99,7 +108,9 @@ class RabbitController extends BaseController {
         while ($envelope = $queue->get(AMQP_AUTOACK)) {
             echo ($envelope->isRedelivery()) ? 'Redelivery' : 'New Message';
             echo PHP_EOL;
-            echo $envelope->getBody(), PHP_EOL;
+            $message = $envelope->getBody();
+            $message = json_decode($message);
+            print_r( $message );
             echo "<p></p>";
         }
 
