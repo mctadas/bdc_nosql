@@ -29,19 +29,16 @@ abstract class BaseModel
     
     public function get_connection()
     {
-
         if(empty($this->_conn))
         {
             if(APPLICATION_ENV == 'production')
             {
-                $m = new MongoClient('mongodb://srvexa4:27017,srvexa6:27017', array('replicaSet' => 'mySet'));
+                $m = new MongoClient('mongodb://srvexa6:27017,srvexa5:27017,srvexa4:27017', array('replicaSet' => 'mySet', 'readPreference' => MongoClient::RP_NEAREST));
             } else {
                 $m = new MongoClient('mongodb://localhost:27017');
             }
             $this->_conn = $m->mt;
         }
-        return $this->_conn;
-             
+        return $this->_conn;     
     }
-
 }
