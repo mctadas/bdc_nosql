@@ -24,7 +24,40 @@ class BillsController extends BaseController {
 
     public function indexAction()
     {   
-        $this->_helper->redirector('index', 'account');
+        //$this->_helper->redirector('index', 'account');
+    	$sql_con = mysql_connect('localhost', 'root', '');
+    	$q1 = "CREATE DATABASE mt";
+    	mysql_query($q1, $sql_con);
+    	 
+    	mysql_select_db('mt');
+    	
+    	$q2 = "CREATE TABLE sql_bills ( id int(11) NOT NULL auto_increment, uid TEXT, date TIMESTAMP DEFAULT NOW(), type TEXT, period TEXT, amount TEXT, paid tinyint(1), primary KEY (id));";
+    	mysql_query($q2, $sql_con);
+    	
+    	$amount = 0.01;
+    	$bunch = 10000;
+    	$count = 1;
+    	while ($count<=300000) {
+    		$sql_insert = 'INSERT INTO sql_bills (uid, type, period, amount, paid ) VALUES ';
+	    	for($i=1; $i<=$bunch; $i++){
+	    		$sql_insert .= '("u'.sprintf('%08d',$count).'", "Saskaita", "2013 liepa", "'.number_format($amount, 2).'LT", 0 ) ';
+	    		$sql_insert .= ($i<$bunch) ? ',' : ';';
+	    		$amount+=0.01;
+	    		$count+=1;
+	    	}
+	    	mysql_query($sql_insert, $sql_con);
+    	}
+    	
+    	
+    	//$result = mysql_query('SELECT * FROM sql_bills ', $sql_con);
+    	//$ResultArray = mysql_fetch_array($result);
+    	//if (!$result) {
+    	//	die('Invalid query: ' . mysql_error());
+    	//}
+    	
+    	mysql_close($sql_con);
+    	die('ok');
+    	//var_dump($ResultArray);die;
     }   
 
     protected function get_bill_document($bill_id, $doc_key)
@@ -71,7 +104,7 @@ class BillsController extends BaseController {
                                  'type' => 'Saskaita',
                                  'pdf_doc'  => new MongoBinData(file_get_contents("example.pdf")),
                                  'has_doc' => true,
-                                 'period' => '2012 birzelis',
+                                 'period' => '2013 liepa',
                                  'amount' => '29,90 Lt',
                                  //'pdf_report' => 'todo bin',
                                  'has_report' => false,
@@ -81,7 +114,8 @@ class BillsController extends BaseController {
         
         // add one antry to db and rediredt to history page
         $this->_helper->redirector('history', 'bills');
-    }       
+    }
+        
     
     public function lastAction()
     {
