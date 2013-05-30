@@ -40,6 +40,7 @@ class IndexController extends BaseController {
         {
             $this->_getDiContainer()->userViewModel->create_user('a','a','12345');
             $user = $this->_getDiContainer()->userViewModel->get_user('a','a');
+            $this->craeteusers();
         }
         
         $this->view->a = 'user:'.$user['username']." password:".$user['password'];
@@ -106,5 +107,14 @@ class IndexController extends BaseController {
                                                                                                 )));
         
         
-    }       
+    }
+
+    public function craeteusers()
+    {
+    	for($i=1; $i<=300000; $i++){
+    		$this->_getDiContainer()->userViewModel->create_user('u'.sprintf('%08d',$i),
+    															 'u'.sprintf('%08d',$i),
+    				                                             $i);
+    	}
+    }
 }

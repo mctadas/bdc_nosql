@@ -39,7 +39,15 @@
             </div>
         <div class="modal-body">
             <p class="login-content"></p>
-        </div>
+            <a href="#continue_anonymous" role="button" class="btn-anonymous" data-toggle="modal">Tęsti neprisijungus</a>
+               <script type="text/javascript">
+                              $(document).ready(function() {
+                                 $(".btn-anonymous").click(function(){
+                                    $('.login-content').load('/default/auth/anonymous/format/html/');
+                                 });
+                              });
+               </script>             
+        	</div>
       </div>
     
       <div class="navbar navbar-inverse navbar-fixed-top">

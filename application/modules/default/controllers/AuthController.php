@@ -87,8 +87,19 @@ class AuthController extends BaseController
 
     public function logoutAction()
     {
-        $this->_getDiContainer()->sessionViewModel->remove_session(Zend_Session::getId());
-        $this->_helper->redirector('index', 'index'); // back to main page
+    	$this->_getDiContainer()->sessionViewModel->remove_session(Zend_Session::getId());
+    	$this->_helper->redirector('index', 'index'); // back to main page
+    }
+    
+    public function anonymousAction()
+    {
+    	$request = $this->getRequest();
+        
+    	var_dump($request->getPost());
+    	
+    	//store into requests
+    	
+    	//list requests
     }
 
 }
