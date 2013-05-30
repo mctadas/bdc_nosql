@@ -43,5 +43,14 @@ class Bill extends BaseReadModel
         $doc = $db->$coll->findOne(array( '_id'  => new MongoId($bill_id)), array($doc_key));
         return $doc[$doc_key]->bin;
     }
+    
+    public function get_bill_count()
+    {
+    	$db = $this->get_connection();
+    	$coll = 'bills';
+    	
+    	return $db->$coll->count();
+    	
+    }
 
 }

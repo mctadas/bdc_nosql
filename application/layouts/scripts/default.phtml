@@ -75,7 +75,10 @@
                 <div class="well sidebar-nav">
                     <?php echo $this->navigation()->menu()->setMinDepth(1); ?>
 	            </div><!--/.well -->
-	            <a class="brand" href="<?= $this->url(array('action'=>'listmessage','controller'=>'rabbit'));?>">išsiųsti užsakymai</a>
+	            <p><a  href="<?= $this->url(array('action'=>'listmessage','controller'=>'rabbit'));?>">išsiųsti užsakymai</a></p>
+	            <p><a  href="<?= $this->url(array('action'=>'generatemessages','controller'=>'rabbit'));?>">sugeneruoti Rabbit žinutes</a></p>
+	            <p><a  href="<?= $this->url(array('action'=>'handlebills','controller'=>'rabbit'));?>">apdoroti Rabbit žinutes</a></p>
+	            <p><a  href="<?= $this->url(array('action'=>'count','controller'=>'bills'));?>">sąskaitų skaičius</a></p>
             </div><!--/span-->
             <div class="span9">
                 <?php echo $this->layout()->content; ?>	

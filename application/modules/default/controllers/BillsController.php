@@ -59,6 +59,8 @@ class BillsController extends BaseController {
     	die('ok');
     	//var_dump($ResultArray);die;
     }   
+    
+   
 
     protected function get_bill_document($bill_id, $doc_key)
     {
@@ -100,22 +102,15 @@ class BillsController extends BaseController {
     
     public function manageAction()
     {
-        $bill_document = array ( 'date' => date('Y F d').' d.',
-                                 'type' => 'Saskaita',
-                                 'pdf_doc'  => new MongoBinData(file_get_contents("example.pdf")),
-                                 'has_doc' => true,
-                                 'period' => '2013 liepa',
-                                 'amount' => '29,90 Lt',
-                                 //'pdf_report' => 'todo bin',
-                                 'has_report' => false,
-                                 'paid'   => false);
-        $user = $this->_getDiContainer()->userViewModel->get_user($this->_user['username']);   
-        $this->_getDiContainer()->billViewModel->save($bill_document, $user['key']);
-        
+    	//TODO delete with dependencies   
         // add one antry to db and rediredt to history page
         $this->_helper->redirector('history', 'bills');
     }
-        
+    
+    public function countAction()
+    {
+    	$this->view->count_bills = $this->_getDiContainer()->billViewModel->get_bill_count();
+    }
     
     public function lastAction()
     {
