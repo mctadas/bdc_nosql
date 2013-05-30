@@ -24,6 +24,9 @@ class RabbitController extends BaseController {
     public function init() {
         parent::init();
         $this->connection = $this->getConnection();
+        
+        $this->sql_con = mysql_connect('localhost', 'root', '');
+        mysql_select_db('mt');
     }
     
     public function indexAction() {
@@ -51,7 +54,7 @@ class RabbitController extends BaseController {
     public function sendmessageAction() {
 
     	$messageText = array(
-    			"type" => "order",
+    			"type" => "service",
     			"data" => array(
     					"user_id" => $this->_getParam("user"),
     					"service" => $this->_getParam("service"),
@@ -71,33 +74,47 @@ class RabbitController extends BaseController {
     {
     	$n_bills = 100;
     	 
-    	$sql_con = mysql_connect('localhost', 'root', '');
-    	mysql_select_db('mt');
+    	$sql_con = $this->sql_con;
     	$result = mysql_query('SELECT id FROM sql_bills LIMIT '.$n_bills, $sql_con);
     	while ($row = mysql_fetch_assoc($result)) {
-    		$messageText = array("id" => $row['id']);
+    		$messageText = array(
+    				"type" => "bill",
+    				"data" => array(
+    						"id" => $row['id'],
+    				),
+    		);
     		$this->publishRabbitMessage('exchange1', 'bills_queue', $messageText);
     	}
     	echo $n_bills.' žinučių sėkmingai sugeneruota.';
     }
     
     //FIXME make rabbit as a library and move function to BillsController
-    public function handlebillsAction()
+    public function handleeventsAction()
     {
-    	$sql_con = mysql_connect('localhost', 'root', '');
-    	mysql_select_db('mt');
-    	
-    	$bundle_size = 10;
-    	for($i=1; $i<=$bundle_size; $i++)
-    	{
-    		$message = $this->getRabbitMessage('exchange1', 'bills_queue');
-    		if(isset($message))
+    	$current_time = date('i');
+     	while($current_time == date('i'))
+     	{
+    		$event = $this->getRabbitMessage('exchange1', 'bills_queue');
+    		if(isset($event))
     		{
-    			$this->store_bill($message->id, $sql_con);
+    			$this->handle($event);
     		} else {
-    			sleep(1);	
-    		}
-    		
+    			sleep(1);
+    		}    		
+//     		var_dump($event); break;
+     	}
+    }
+    
+    public function handle($event)
+    {
+    	switch ($event->type){
+    		case 'bill':
+    			$this->store_bill($event->data->id, $this->sql_con);
+    			break;
+    		case 'service':
+    			$this->_getDiContainer()->userViewModel
+    			->addService($event->data->user_id, $event->data->service);
+    			break;
     	}
     }
     
@@ -115,13 +132,10 @@ class RabbitController extends BaseController {
 	    		//'pdf_report' => 'todo bin',
 	    		'has_report' => false,
 	    		'paid'   => $row['paid']);
-	    $user = $this->_getDiContainer()->userViewModel->get_user($this->_user['username']);
+	    $user = $this->_getDiContainer()->userViewModel->get_user($row['uid']);
 	    $this->_getDiContainer()->billViewModel->save($bill_document, $user['key']);
 	}
-    
-    public function listmessageAction() {
-    }
-    
+     
     public function getRabbitMessage($channel_name, $queue_name){
         /**
          * Filename: receive.php
@@ -180,17 +194,7 @@ class RabbitController extends BaseController {
     	$queue->declare();
     	
     	$message    = $exchange->publish( json_encode($messageText)  );
+    	return $message;
     }
-    
-    public function handle($event)
-    {
-    	switch ($event->type){
-    		case 'order':
-    			$this->_getDiContainer()->userViewModel
-    				->addService($event->data->user_id, $event->data->service);
-    			break;
-    	}
-    	
-    }  
     
 }

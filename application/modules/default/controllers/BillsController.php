@@ -26,6 +26,10 @@ class BillsController extends BaseController {
     {   
         //$this->_helper->redirector('index', 'account');
     	$sql_con = mysql_connect('localhost', 'root', '');
+    	
+    	$q0 = "DROP DATABASE mt";
+    	mysql_query($q0, $sql_con);
+    	
     	$q1 = "CREATE DATABASE mt";
     	mysql_query($q1, $sql_con);
     	 
