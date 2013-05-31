@@ -39,15 +39,8 @@
             </div>
         <div class="modal-body">
             <p class="login-content"></p>
-            <a href="#continue_anonymous" role="button" class="btn-anonymous" data-toggle="modal">Tęsti neprisijungus</a>
-               <script type="text/javascript">
-                              $(document).ready(function() {
-                                 $(".btn-anonymous").click(function(){
-                                    $('.login-content').load('/default/auth/anonymous/format/html/');
-                                 });
-                              });
-               </script>             
-        	</div>
+                       
+        </div>
       </div>
     
       <div class="navbar navbar-inverse navbar-fixed-top">
@@ -70,7 +63,7 @@
               </p>
               <ul class="nav">
                 <li><a href="<?= $this->url(array('action'=>'index','controller'=>'services')); ?>">Mano paslaugos</a></li>
-                <li><a href="<?= $this->url(array('action'=>'index','controller'=>'bills')); ?>">Sąskaitos</a></li>
+                <li><a href="<?= $this->url(array('action'=>'history','controller'=>'bills')); ?>">Sąskaitos</a></li>
               </ul>
             </div><!--/.nav-collapse -->
          </div>
@@ -87,6 +80,7 @@
 	            <p><a  href="<?= $this->url(array('action'=>'generatemessages','controller'=>'rabbit'));?>">sugeneruoti Rabbit žinutes</a></p>
 	            <p><a  href="<?= $this->url(array('action'=>'handleevents','controller'=>'rabbit'));?>">apdoroti Rabbit žinutes</a></p>
 	            <p><a  href="<?= $this->url(array('action'=>'count','controller'=>'bills'));?>">sąskaitų skaičius</a></p>
+	            <p><a  href="<?= $this->url(array('action'=>'listrequests','controller'=>'auth'));?>">anoniminiai paklausimai</a></p>
             </div><!--/span-->
             <div class="span9">
                 <?php echo $this->layout()->content; ?>	

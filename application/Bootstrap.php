@@ -145,6 +145,10 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             $c->eventHandler = function() use ($c) {
                             return new \ViewModel\Event\EventHandler($c->db);
                         };
+                        
+            $c->requestViewModel = function() use ($c) {
+                            return new \ViewModel\Request\Request($c->db);
+                        };
                 
 		$c->exampleViewModel = function() use ($c) {
 					return new \ViewModel\Example\Example($c->db);

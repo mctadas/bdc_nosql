@@ -57,16 +57,32 @@ class AuthController extends BaseController
                 if ($this->_process($form->getValues())) {
                     // We're authenticated! Redirect to the home page
                     
-                    $next = $this->_getParam('nc');
-                    if(isset($next)){
-                        $this->_redirect($this->_getParam('nc').'/'.$this->_getParam('na'));              
-                    } else {
-                        $this->_helper->redirector('index', 'account');
-                    }
+                    $this->redirectNext();
                 }
             }
         }
         $this->view->form = $form;
+        $this->setNext();
+    }
+
+    protected function setNext()
+    {
+        $next_action = $this->_getParam('na');
+        if(isset($next_action))
+        {
+            $this->view->next = "/nc/".$this->_getParam('nc').'/na/'.$this->_getParam('na').'/info/'.$this->_getParam('info');
+        }
+    }
+
+    protected function redirectNext($action = 'index', $controller = 'services')
+    {
+        $next = $this->_getParam('na');
+        if(isset($next)){
+            $this->_redirect($this->_getParam('nc').'/'.$this->_getParam('na').'/info/'.$this->_getParam('info'));  
+                        
+        } else {
+            $this->_helper->redirector($action, $controller);
+        }
     }
 
     protected function _process($values)
@@ -94,14 +110,27 @@ class AuthController extends BaseController
     public function anonymousAction()
     {
     	$request = $this->getRequest();
-        
-    	var_dump($request->getPost());
-    	
-    	//store into requests
-    	
-    	//list requests
+    	if(isset($request) and $request->isPost())
+    	{
+    	    $post = $request->getPost();
+    	    if($post['request'] == "Išsiųsti")
+    	    {
+    	      $post['service_click'] = $this->_getParam('info');
+    	      $this->_getDiContainer()->requestViewModel->save($post);
+    	      $this->redirectNext();
+    	    }
+    	}
+    	$this->setNext();
     }
 
+    public function listrequestsAction()
+    {
+        $requests = $this->_getDiContainer()->requestViewModel->getRequests();
+        foreach($requests as $request)
+        {
+            var_dump($request);
+        }
+    }
 }
 
 

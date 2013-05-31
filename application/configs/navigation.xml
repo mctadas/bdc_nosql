@@ -28,17 +28,13 @@
 		    	</services>
 		    	<bills>
 		    	    <label>Sąskaitos ir mokėjimai</label>
-	   		        <uri>/bills</uri>
+	   		        <uri>/bills/history</uri>
 	   		        
 	   		        <pages>
 			   		    <history>
 			           		<label>Atsiskaitymų istorija</label>
 			           		<uri>/bills/history</uri>
-			       		</history> 
-			       		<management>
-			           		<label>Sąskaitų valdymas</label>
-			           		<uri>/bills/manage</uri>    	
-			            </management>
+			       		</history>
 			   		</pages>    
 		    	</bills>
   				    
