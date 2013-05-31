@@ -128,7 +128,9 @@ class AuthController extends BaseController
         $requests = $this->_getDiContainer()->requestViewModel->getRequests();
         foreach($requests as $request)
         {
-            var_dump($request);
+            print "<pre>";
+            print_r($request);
+            print "</pre>";
         }
     }
 }
