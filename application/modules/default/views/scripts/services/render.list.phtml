@@ -5,10 +5,23 @@
         
         <?php foreach($service['services'] as $item): ?>
             <div class="span3" >
-                <div class="thumbnail" style="text-align: center; padding:10px; margin-bottom: 25px;">
-                    <div id="container_<?=$item['id']?>">
-                        <p><?=$item['label'];?></p>
-                        <p><?=$item['price'];?></p>
+                <div class="thumbnail" style="text-align: center; padding:10px; margin-bottom: 25px; min-height:170px;">
+                    <div id="container_<?=$item['id']?>" style="align:center;">
+                        <p></p>
+                       
+                        <div class="name">
+                          <?=$item['label'];?>
+                        </div>
+               
+                        
+                        <div class="price" >
+                            <div class="priceContent">
+                            <span class="money"><?=$item['price'];?></span>
+                            </div>
+                        </div>
+                        <p></p>
+                        
+                        
                         <?php if(isset($this->username)):?>
                         	<?php if(in_array($item['id'], $this->user_services)):?>
                         	<p>Paslauga užsakyta</p>
