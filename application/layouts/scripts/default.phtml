@@ -77,8 +77,12 @@
 	            </div><!--/.well -->
 	            <p><a  href="<?= $this->url(array('action'=>'index','controller'=>'bills'));?>">sugeneruoti 300K SQL sąskaitų</a></p>
 	            <p><a  href="<?= $this->url(array('action'=>'generatemessages','controller'=>'rabbit'));?>">sugeneruoti Rabbit žinutes</a></p>
-	            <p><a  href="<?= $this->url(array('action'=>'handleevents','controller'=>'rabbit'));?>">apdoroti Rabbit žinutes</a></p>
-	            <p><a  href="<?= $this->url(array('action'=>'count','controller'=>'bills'));?>">sąskaitų skaičius</a></p>
+	            <p><a  href="<?= $this->url(array('action'=>'handlebillevents','controller'=>'rabbit'));?>">apdoroti Rabbit žinutes (bill)</a></p>
+	            <p>
+
+                    <p><a  href="<?= $this->url(array('action'=>'handleserviceevents','controller'=>'rabbit'));?>">apdoroti Rabbit žinutes (service)</a></p>
+
+<a  href="<?= $this->url(array('action'=>'count','controller'=>'bills'));?>">sąskaitų skaičius</a></p>
 	            <p><a  href="<?= $this->url(array('action'=>'listrequests','controller'=>'auth'));?>">anoniminiai paklausimai</a></p>
             </div><!--/span-->
             <div class="span9">

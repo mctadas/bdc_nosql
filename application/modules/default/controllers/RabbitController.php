@@ -88,10 +88,11 @@ class RabbitController extends BaseController {
     	echo $n_bills.' žinučių sėkmingai sugeneruota.';
     }
     
-    //FIXME make rabbit as a library and move function to BillsController
-    public function handleeventsAction()
+    public function handlebilleventsAction()//FIXME make rabbit a a library and move function to BillsController
     {
-    	$current_time = date('i');
+        date_default_timezone_set('Europe/Vilnius');	
+        
+        $current_time = date('i');
      	while($current_time == date('i'))
      	{
     		$event = $this->getRabbitMessage('exchange1', 'bills_queue');
@@ -101,10 +102,26 @@ class RabbitController extends BaseController {
     		} else {
     			sleep(1);
     		}    		
-//     		var_dump($event); break;
      	}
     }
     
+    public function handleserviceeventsAction(){
+        date_default_timezone_set('Europe/Vilnius');
+
+        $current_time = date('i');
+        while($current_time == date('i'))
+        {
+                $event = $this->getRabbitMessage('exchange1', 'service_queue');
+                if(isset($event))
+                {
+                        $this->handle($event);
+                } else {
+                        sleep(1);
+                }               
+        }
+
+    }
+
     public function handle($event)
     {
     	switch ($event->type){
@@ -151,7 +168,7 @@ class RabbitController extends BaseController {
         // Open Queue and bind to exchange
         $queue      = new AMQPQueue($channel);
         $queue->setName($queue_name);
-        $queue->bind($channel_name, 'key1');
+        $queue->bind($channel_name, $queue_name);
         $queue->declare();
         
         // Prevent message redelivery with AMQP_AUTOACK param
@@ -182,19 +199,25 @@ class RabbitController extends BaseController {
     	 */
     	
     	// Open Channel
-    	$channel    = new AMQPChannel($this->connection);
+    	try{
+	$channel    = new AMQPChannel($this->connection);
     	// Declare exchange
     	$exchange   = new AMQPExchange($channel);
     	$exchange->setName($channel_name);
-    	$exchange->setType('fanout');
-    	$exchange->declare();
+    	$exchange->setType(AMQP_EX_TYPE_DIRECT);
+        $exchange->declare();
+
     	// Create Queue
     	$queue      = new AMQPQueue($channel);
     	$queue->setName($queue_name);
     	$queue->declare();
-    	
-    	$message    = $exchange->publish( json_encode($messageText)  );
+
+	$queue->bind($channel_name, $queue_name);
+
+    	$message    = $exchange->publish( json_encode($messageText), $queue_name );
     	return $message;
+
+} catch (Exception $e) {print_r($e);die;}
     }
     
 }
