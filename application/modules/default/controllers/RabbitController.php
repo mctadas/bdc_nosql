@@ -72,7 +72,7 @@ class RabbitController extends BaseController {
     
     public function generatemessagesAction()
     {
-    	$n_bills = 100000;
+    	$n_bills = 1000;
     	 
     	$sql_con = $this->sql_con;
     	$result = mysql_query('SELECT id FROM sql_bills LIMIT '.$n_bills, $sql_con);
