@@ -153,23 +153,17 @@ class RabbitController extends BaseController {
 	    $this->_getDiContainer()->billViewModel->save($bill_document, $user['key']);
 	}
      
-    public function getRabbitMessage($channel_name, $queue_name){
-        /**
-         * Filename: receive.php
-         * Purpose:
-         * Receive messages from RabbitMQ server using AMQP extension
-         * Exchange Name: exchange1
-         * Exchange Type: fanout
-         * Queue Name: queue1
-         */
-        
-        // Open channel
+    public function getRabbitMessage($channel_name, $queue_name)
+    {
+        try{
         $channel    = new AMQPChannel($this->connection);
-        // Open Queue and bind to exchange
+        
         $queue      = new AMQPQueue($channel);
         $queue->setName($queue_name);
+        //$queue->declare();
         $queue->bind($channel_name, $queue_name);
-        $queue->declare();
+        //$queue->setFlags(AMQP_DURABLE | AMQP_AUTODELETE);
+        //$queue->declare();
         
         // Prevent message redelivery with AMQP_AUTOACK param
 //         while ($envelope = $queue->get(AMQP_AUTOACK)) {
@@ -182,35 +176,25 @@ class RabbitController extends BaseController {
             
             return $message;
         }
-
+        }catch(Exception $e){print_r($e); die;}
     }
     
     public function publishRabbitMessage($channel_name, $queue_name, $messageText)
     {
-    	// RabbitMQ
-    	
-    	/**
-    	 * Filename: send.php
-    	 * Purpose:
-    	 * Send messages to RabbitMQ server using AMQP extension
-    	 * Exchange Name: exchange1
-    	 * Exchange Type: fanout
-    	 * Queue Name: queue1
-    	 */
-    	
-    	// Open Channel
     	try{
 	$channel    = new AMQPChannel($this->connection);
-    	// Declare exchange
-    	$exchange   = new AMQPExchange($channel);
+    	
+        $exchange   = new AMQPExchange($channel);
     	$exchange->setName($channel_name);
     	$exchange->setType(AMQP_EX_TYPE_DIRECT);
+        $exchange->setFlags(AMQP_DURABLE | AMQP_AUTODELETE);
         $exchange->declare();
 
     	// Create Queue
     	$queue      = new AMQPQueue($channel);
     	$queue->setName($queue_name);
-    	$queue->declare();
+        $queue->setFlags(AMQP_DURABLE | AMQP_AUTODELETE);
+        $queue->declare();
 
 	$queue->bind($channel_name, $queue_name);
 
