@@ -4,15 +4,15 @@
         <h3><?=$service['label'];?></h3>
         
         <?php foreach($service['services'] as $item): ?>
-            <div class="span3" >
-                <div class="thumbnail" style="text-align: center; padding:10px; margin-bottom: 25px; min-height:170px;">
+            <div class="span3">
+                <div class="thumbnail" style="text-align: center; padding:10px; margin-bottom: 25px; min-height:170px; min-width:100px;">
                     <div id="container_<?=$item['id']?>" style="align:center;">
                         <p></p>
                        
                         <div class="name">
                           <?=$item['label'];?>
                         </div>
-               
+               <br>
                         
                         <div class="price" >
                             <div class="priceContent">
