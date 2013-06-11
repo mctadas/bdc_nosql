@@ -49,7 +49,7 @@ class Content extends BaseModel {
         return $doc;
     }
 
-    public function update($content, $uri)
+    public function update($content, $uri, $category)
     {
         $db = $this->get_connection();
         $coll = 'content';
@@ -58,7 +58,7 @@ class Content extends BaseModel {
                         'body' => $content,
                         'uri' => $uri,
                         'date' => time(),
-                        'category' => 0,
+                        'category' => $category,
                 )
                 
         );

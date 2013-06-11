@@ -81,7 +81,7 @@
         </div>
       </div>
     
-      <div class="container-fluid">
+      <div class="container-fluid" style="top:70px; position:absolute;">     
           <div class="row-fluid">
             <div class="span3">
                 <div class="well sidebar-nav">
@@ -96,6 +96,8 @@
             </div><!--/span-->
 
             <div class="span7">
+
+                
                 <?php if(isset($this->user) and $this->user['category'] <= $this->content['category']):?>
                     <div class="grey-rounded-block-1">
                         <form id="edit-form" method="post" action="<?= $this->url(array('action'=>'edit','controller'=>'services'));?>"><fieldset>
@@ -113,9 +115,15 @@
                                   });
                                 </script>
                                 <input type="hidden" name="uri" id="uri" value="<?=$this->url();?>" />
+                                <input type="hidden" name="category" id="category" value="<?=max($this->user['category'],$this->content['category']);?>" />
                         </fieldset></form>
                     </div>
+                <?php elseif(isset($this->content['body'])):?>
+                    <div class="grey-rounded-block-1">
+                        <?=$this->content['body'];?>
+                    </div>
                 <?php endif;?>           
+                
             
                 <?php echo $this->layout()->content; ?>	
             </div>

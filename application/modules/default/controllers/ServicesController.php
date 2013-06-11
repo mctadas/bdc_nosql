@@ -43,6 +43,6 @@ class ServicesController extends BaseController {
     {
         $request = $this->getRequest();
         $values = $request->getPost();
-        $this->view->content = $this->_getDiContainer()->contentViewModel->update($values['mce_0'], $values['uri']);
+        $this->view->content = $this->_getDiContainer()->contentViewModel->update($values['mce_0'], $values['uri'], $values['category']);
     }
 }
