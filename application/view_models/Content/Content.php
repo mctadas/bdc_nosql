@@ -57,7 +57,6 @@ class Content extends BaseModel {
                 '$set' => array(
                         'body' => $content,
                         'uri' => $uri,
-                        'date' => time(),
                         'category' => $category,
                 )
                 
