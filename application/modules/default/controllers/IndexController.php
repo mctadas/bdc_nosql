@@ -32,20 +32,20 @@ class IndexController extends BaseController {
         ini_set('display_errors', 'On');
 
         
-        $this->_getDiContainer()->contentViewModel->save(array('body' =>
-        		'<p> INTERNET Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse felis sapien, bibendum ut tincidunt non, pellentesque vitae massa. Cras arcu lectus, pulvinar sed felis eget, interdum sagittis urna. Quisque viverra ipsum lacus, vitae venenatis elit pretium a. Integer pellentesque id magna eget blandit. Nunc dictum, lacus a venenatis pellentesque, urna quam sodales lorem, vitae auctor leo nibh et purus. Aenean vitae posuere est. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc a nibh non elit pharetra pretium sit amet vitae ipsum. Vestibulum lacinia molestie sagittis. Nullam tempor ac diam in varius. Nam interdum fermentum diam, eu auctor tellus aliquet non. Curabitur vitae sodales arcu. Integer malesuada et est ac semper.</p>
-        		 <p> Vestibulum eget purus eget nibh convallis lobortis aliquam et tellus. Mauris et mi id nulla adipiscing sollicitudin. Aliquam at dapibus felis. Ut turpis urna, consequat nec hendrerit posuere, mollis </p>',
-        		'category' => 1,
-                'uri' => '/services/internet',
-        		'date' => time(),
-        		));
-        $this->_getDiContainer()->contentViewModel->save(array('body' =>
-        		'<p> TELEPHONE Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse felis sapien, bibendum ut tincidunt non, pellentesque vitae massa. Cras arcu lectus, pulvinar sed felis eget, interdum sagittis urna. Quisque viverra ipsum lacus, vitae venenatis elit pretium a. Integer pellentesque id magna eget blandit. Nunc dictum, lacus a venenatis pellentesque, urna quam sodales lorem, vitae auctor leo nibh et purus. Aenean vitae posuere est. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc a nibh non elit pharetra pretium sit amet vitae ipsum. Vestibulum lacinia molestie sagittis. Nullam tempor ac diam in varius. Nam interdum fermentum diam, eu auctor tellus aliquet non. Curabitur vitae sodales arcu. Integer malesuada et est ac semper.</p>
-        		 <p> Vestibulum eget purus eget nibh convallis lobortis aliquam et tellus. Mauris et mi id nulla adipiscing sollicitudin. Aliquam at dapibus felis. Ut turpis urna, consequat nec hendrerit posuere, mollis </p>',
-        		'category' => 0,
-                'uri' => '/services/telephone',
-        		'date' => time(),
-        ));
+        //$this->_getDiContainer()->contentViewModel->save(array('body' =>
+        //		'<p> INTERNET Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse felis sapien, bibendum ut tincidunt non, pellentesque vitae massa. Cras arcu lectus, pulvinar sed felis eget, interdum sagittis urna. Quisque viverra ipsum lacus, vitae venenatis elit pretium a. Integer pellentesque id magna eget blandit. Nunc dictum, lacus a venenatis pellentesque, urna quam sodales lorem, vitae auctor leo nibh et purus. Aenean vitae posuere est. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc a nibh non elit pharetra pretium sit amet vitae ipsum. Vestibulum lacinia molestie sagittis. Nullam tempor ac diam in varius. Nam interdum fermentum diam, eu auctor tellus aliquet non. Curabitur vitae sodales arcu. Integer malesuada et est ac semper.</p>
+        //		 <p> Vestibulum eget purus eget nibh convallis lobortis aliquam et tellus. Mauris et mi id nulla adipiscing sollicitudin. Aliquam at dapibus felis. Ut turpis urna, consequat nec hendrerit posuere, mollis </p>',
+        //		'category' => 1,
+        //       'uri' => '/services/internet',
+        //		'date' => time(),
+        //		));
+        //$this->_getDiContainer()->contentViewModel->save(array('body' =>
+       // 		'<p> TELEPHONE Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse felis sapien, bibendum ut tincidunt non, pellentesque vitae massa. Cras arcu lectus, pulvinar sed felis eget, interdum sagittis urna. Quisque viverra ipsum lacus, vitae venenatis elit pretium a. Integer pellentesque id magna eget blandit. Nunc dictum, lacus a venenatis pellentesque, urna quam sodales lorem, vitae auctor leo nibh et purus. Aenean vitae posuere est. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nunc a nibh non elit pharetra pretium sit amet vitae ipsum. Vestibulum lacinia molestie sagittis. Nullam tempor ac diam in varius. Nam interdum fermentum diam, eu auctor tellus aliquet non. Curabitur vitae sodales arcu. Integer malesuada et est ac semper.</p>
+       // 		 <p> Vestibulum eget purus eget nibh convallis lobortis aliquam et tellus. Mauris et mi id nulla adipiscing sollicitudin. Aliquam at dapibus felis. Ut turpis urna, consequat nec hendrerit posuere, mollis </p>',
+        //		'category' => 0,
+        //        'uri' => '/services/telephone',
+       // 		'date' => time(),
+        //));
         
         //____________________
         
