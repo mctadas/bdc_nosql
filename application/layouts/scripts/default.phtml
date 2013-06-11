@@ -75,7 +75,7 @@
               <ul class="nav" >
                 <li><a href="<?= $this->url(array('action'=>'index','controller'=>'services')); ?>" style="padding-top:15px;">Mano paslaugos</a></li>
                 <li><a href="<?= $this->url(array('action'=>'history','controller'=>'bills')); ?>" style="padding-top:15px;">Sąskaitos</a></li>
-              </ul>
+              </ul>    
             </div><!--/.nav-collapse -->
          </div>
         </div>
@@ -97,8 +97,8 @@
 
             <div class="span7">
 
-                
-                <?php if(isset($this->user) and $this->user['category'] <= $this->content['category']):?>
+                <div class="info"></div>
+                <?php if(isset($this->user) and $this->user['category'] <= $this->content['category'] and $this->url() != "/services/edit"):?>
                     <div class="grey-rounded-block-1">
                         <form id="edit-form" method="post" action="<?= $this->url(array('action'=>'edit','controller'=>'services'));?>"><fieldset>
                             <div class="editable" style="width:100%">
@@ -110,7 +110,7 @@
                                 <script type="text/javascript">
                                   $(document).ready(function() {
                                      $("#edit-text").click(function(){
-                                    	 $('#edit-form').submit();
+                                         $('#edit-form').submit();                                         
                                      });
                                   });
                                 </script>
@@ -123,6 +123,7 @@
                         <?=$this->content['body'];?>
                     </div>
                 <?php endif;?>           
+                
             
                 <?php echo $this->layout()->content; ?>	
             </div>
