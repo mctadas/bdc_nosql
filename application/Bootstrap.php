@@ -149,6 +149,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
             $c->requestViewModel = function() use ($c) {
                             return new \ViewModel\Request\Request($c->db);
                         };
+            $c->contentViewModel = function() use ($c) {
+                        	return new \ViewModel\Content\Content($c->db);
+                        };
                 
 		$c->exampleViewModel = function() use ($c) {
 					return new \ViewModel\Example\Example($c->db);

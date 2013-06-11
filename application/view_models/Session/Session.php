@@ -8,14 +8,14 @@ class Session extends BaseReadModel
 {
     protected static $_collection = 'sessions';
     
-    public function save_session($username ,$session_id)
+    public function save_session($user ,$session_id)
     {
         $db = $this->get_connection();
         $coll = 'sessions';
         $db->$coll->insert(array( 'session'  => $session_id,
-                                  'username' => $username,
+                                  'username' => $user['username'],
+                                  'category' => $user['category'],
                                   'time'     => time()));
-                                  
     }
     
     public function get_session($session_id){

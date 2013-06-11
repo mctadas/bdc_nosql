@@ -94,7 +94,7 @@ class AuthController extends BaseController
                 $user = $this->_getDiContainer()->userViewModel->
                     get_user($username, $password);
                 $this->_getDiContainer()->sessionViewModel->
-                    save_session($username, Zend_Session::getId());
+                    save_session($user, Zend_Session::getId());
                 return true;
             }
             return false;    

@@ -27,4 +27,13 @@ a:hover, a:active  {color:#c60021;}
     background-color: #c60021;
 }
 
+.grey-rounded-block-1 {
+    background: none repeat scroll 0% 0% rgb(243, 243, 243);
+    border-radius: 4px 4px 4px 4px;
+	margin: 10px;
+    margin-top: 0px;
+	padding:25px;
+}
+
+
 

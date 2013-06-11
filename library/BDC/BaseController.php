@@ -50,6 +50,7 @@ abstract class BaseController extends Zend_Controller_Action
             }
         } else {
             $this->view->username = $this->_user['username'];
+            $this->view->user = $this->_user;
         }
     }
     

@@ -8,7 +8,19 @@
     <link href="/styles/mt.css" rel="stylesheet" media="screen">
     <script src="http://code.jquery.com/jquery.js"></script>
     <script src="/styles/bootstrap/js/bootstrap.min.js"></script>
-    
+    <script type="text/javascript" src="/js/tinymce/tinymce.min.js"></script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector: "div.editable",
+            inline: true,
+            plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table contextmenu paste"
+            ],
+            toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+        });
+    </script>
     <style type="text/css">
       body {
         padding-top: 60px;
@@ -78,14 +90,35 @@
 	            <p><a  href="<?= $this->url(array('action'=>'index','controller'=>'bills'));?>">sugeneruoti 300K SQL sąskaitų</a></p>
 	            <p><a  href="<?= $this->url(array('action'=>'generatemessages','controller'=>'rabbit'));?>">sugeneruoti Rabbit žinutes</a></p>
 	            <p><a  href="<?= $this->url(array('action'=>'handlebillevents','controller'=>'rabbit'));?>">apdoroti Rabbit žinutes (bill)</a></p>
-	            <p>
-
-                    <p><a  href="<?= $this->url(array('action'=>'handleserviceevents','controller'=>'rabbit'));?>">apdoroti Rabbit žinutes (service)</a></p>
-
-<a  href="<?= $this->url(array('action'=>'count','controller'=>'bills'));?>">sąskaitų skaičius</a></p>
+	            <p><a  href="<?= $this->url(array('action'=>'handleserviceevents','controller'=>'rabbit'));?>">apdoroti Rabbit žinutes (service)</a></p>
+                <p><a  href="<?= $this->url(array('action'=>'count','controller'=>'bills'));?>">sąskaitų skaičius</a></p>
 	            <p><a  href="<?= $this->url(array('action'=>'listrequests','controller'=>'auth'));?>">anoniminiai paklausimai</a></p>
             </div><!--/span-->
-            <div class="span9">
+
+            <div class="span7">
+                <?php if(isset($this->user) and $this->user['category'] <= $this->content['category']):?>
+                    <div class="grey-rounded-block-1">
+                        <form id="edit-form" method="post" action="<?= $this->url(array('action'=>'edit','controller'=>'services'));?>"><fieldset>
+                            <div class="editable" style="width:100%">
+                                <?=$this->content['body'];?>
+                                <?php var_dump($this->content);?>
+                                <?php var_dump($this->user);?>
+                            </div>
+                            <div>
+                                <a class="btn submitbtn" id="edit-text" href="#"><img src="/save.png"></a>
+                            </div>
+                                <script type="text/javascript">
+                                  $(document).ready(function() {
+                                     $("#edit-text").click(function(){
+                                    	 $('#edit-form').submit();
+                                     });
+                                  });
+                                </script>
+                                <input type="hidden" name="uri" id="uri" value="<?=$this->url();?>" />
+                        </fieldset></form>
+                    </div>
+                <?php endif;?>           
+            
                 <?php echo $this->layout()->content; ?>	
             </div>
          </div>
