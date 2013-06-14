@@ -82,11 +82,11 @@ class RabbitController extends BaseController {
 
     public function generatemessagesAction()
     {
-        $n_bills = 1;
+        $n_bills = 1000;
         
         $sql_con = $this->sql_con;
-        $result = mysql_query('SELECT id FROM sql_bills LIMIT ' . $n_bills, $sql_con);
-        while ( $row = mysql_fetch_assoc($result) )
+        $result = mysql_query('SELECT * FROM sql_bills LIMIT ' . $n_bills, $sql_con);	
+	while ( $row = mysql_fetch_assoc($result) )
         {
             $messageText = $this->generate_json_bill($row);
             $this->publishRabbitMessage('exchange1', 'bills', $messageText);
@@ -94,14 +94,14 @@ class RabbitController extends BaseController {
         echo $n_bills . ' žinučių sėkmingai sugeneruota.';
     }
 
-    public function generate_json_bills($row)
+    public function generate_json_bill($row)
     {
-        $user = $this->_getDiContainer()->userViewModel->get_user($row['uid']);
-    
+        date_default_timezone_set('Europe/Vilnius');
+        $user = $this->_getDiContainer()->userViewModel->get_user($row['uid']); 
         $bill_document = array(
                 'date' => date('Y F d', strtotime($row['date'])) . ' d.',
                 'type' => $row['type'],
-                'pdf_doc' => new MongoBinData(file_get_contents("example.pdf"), 2),
+                'pdf_doc' => base64_encode(file_get_contents("example.pdf")),
                 'has_doc' => true,
                 'period' => $row['period'],
                 'amount' => $row['amount'],
@@ -109,6 +109,10 @@ class RabbitController extends BaseController {
                 'paid' => $row['paid'],
                 'ukey' => $user['key']
         );
+//print_r($bill_document);
+//$json = json_encode($bill_document);
+//print_r($json);        
+//die;
         return $bill_document;
     
     }
@@ -227,14 +231,14 @@ class RabbitController extends BaseController {
             $exchange = new AMQPExchange($channel);
             $exchange->setName($channel_name);
             $exchange->setType(AMQP_EX_TYPE_DIRECT);
-            $exchange->setFlags(AMQP_DURABLE | AMQP_AUTODELETE);
+            $exchange->setFlags(AMQP_DURABLE);
             $exchange->declare();
             
             // Create Queue
             $queue = new AMQPQueue($channel);
             $queue->setName($queue_name);
-            $queue->setFlags(AMQP_DURABLE | AMQP_AUTODELETE);
-            $queue->declare();
+            //$queue->setFlags(AMQP_DURABLE | AMQP_AUTODELETE);
+            //$queue->declare();
             
             $queue->bind($channel_name, $queue_name);
             
