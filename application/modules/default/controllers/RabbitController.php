@@ -80,6 +80,24 @@ class RabbitController extends BaseController {
         }
     }
 
+    public function generatemessagesphpAction()
+    {
+    	$n_bills = 1000;
+    	 
+    	$sql_con = $this->sql_con;
+    	$result = mysql_query('SELECT id FROM sql_bills LIMIT '.$n_bills, $sql_con);
+    	while ($row = mysql_fetch_assoc($result)) {
+    		$messageText = array(
+    				"type" => "bill",
+    				"data" => array(
+    						"id" => $row['id'],
+    				),
+    		);
+    		$this->publishRabbitMessage('exchange1', 'bills_queue', $messageText);
+    	}
+    	echo $n_bills.' þinuè sëingai sugeneruota.';
+    }
+
     public function generatemessagesAction()
     {
         $n_bills = 1000;

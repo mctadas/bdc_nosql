@@ -88,7 +88,8 @@
                     <?php echo $this->navigation()->menu()->setMinDepth(1); ?>
 	            </div><!--/.well -->
 	            <p><a  href="<?= $this->url(array('action'=>'index','controller'=>'bills'));?>">sugeneruoti 300K SQL sąskaitų</a></p>
-	            <p><a  href="<?= $this->url(array('action'=>'generatemessages','controller'=>'rabbit'));?>">sugeneruoti Rabbit žinutes</a></p>
+	            <p><a  href="<?= $this->url(array('action'=>'generatemessages','controller'=>'rabbit'));?>">sugeneruoti Rabbit žinutes(.NET)</a></p>
+                    <p><a  href="<?= $this->url(array('action'=>'generatemessagesphp','controller'=>'rabbit'));?>">sugeneruoti Rabbit žinutes(PHP)</a></p>
 	            <p><a  href="<?= $this->url(array('action'=>'handlebillevents','controller'=>'rabbit'));?>">apdoroti Rabbit žinutes (bill)</a></p>
 	            <p><a  href="<?= $this->url(array('action'=>'handleserviceevents','controller'=>'rabbit'));?>">apdoroti Rabbit žinutes (service)</a></p>
                 <p><a  href="<?= $this->url(array('action'=>'count','controller'=>'bills'));?>">sąskaitų skaičius</a></p>
@@ -98,7 +99,7 @@
             <div class="span7">
 
                 <div class="info"></div>
-                <?php if(isset($this->user) and $this->user['category'] <= $this->content['category'] and $this->url() != "/services/edit"):?>
+                <?php if(isset($this->user) and isset($this->user['category']) and $this->user['category'] <= $this->content['category'] and $this->url() != "/services/edit"):?>
                     <div class="grey-rounded-block-1">
                         <form id="edit-form" method="post" action="<?= $this->url(array('action'=>'edit','controller'=>'services'));?>"><fieldset>
                             <div class="editable" style="width:100%">
